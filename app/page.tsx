@@ -1,3 +1,3 @@
 export default function Home() {
-  return <>Netflix Clone</>;
+  return <div className="text-2xl text-green-500">Netflix Clone</div>;
 }
