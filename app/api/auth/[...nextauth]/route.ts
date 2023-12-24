@@ -1,21 +1,22 @@
-import NextAuth from "next-auth/next";
+import NextAuth, { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import { compare } from "bcrypt";
 import prismadb from "@/lib/prismadb";
 
-export default NextAuth({
+const authOptions: AuthOptions = {
   providers: [
-    Credentials({
+    CredentialsProvider({
       id: "credentials",
       name: "Credentials",
       credentials: {
         email: {
-          label: "email",
+          label: "Email",
           type: "text",
         },
         password: {
-          label: "password",
+          label: "Password",
           type: "password",
         },
       },
@@ -42,4 +43,19 @@ export default NextAuth({
       },
     }),
   ],
-});
+  pages: {
+    signIn: "/auth",
+  },
+  debug: process.env.NODE_ENV === "development",
+  session: {
+    strategy: "jwt",
+  },
+  jwt: {
+    secret: process.env.NEXTAUTH_JWT_SECRET,
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+};
+
+const handler = NextAuth(authOptions);
+
+export { handler as POST, handler as GET };
