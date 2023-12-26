@@ -4,8 +4,6 @@ import fetcher from "@/lib/fetcher";
 
 const userCurrentUser = () => {
   const { data, error, isLoading, mutate } = useSWR("/api/current", fetcher);
-  //   console.log(data);
-
   return {
     data,
     error,
