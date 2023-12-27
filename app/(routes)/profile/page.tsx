@@ -2,9 +2,7 @@
 import { useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { NextPageContext } from "next";
 
-import useCurrentUser from "@/hooks/useCurrentuser";
 
 const images = [
   "/images/default-blue.png",

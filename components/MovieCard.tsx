@@ -1,10 +1,11 @@
 import React, { useCallback } from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 interface MovieCardProps {
-  data: Record<string, any>[];
+  data: Record<string,any>;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+  console.log(data);
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
       <img
