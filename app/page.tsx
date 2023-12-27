@@ -1,6 +1,5 @@
 "use client";
 import Navbar from "../components/Navbar";
-import Navbar from "../components/Navbar"
 import BillBoard from "../components/BillBoard"
 import MovieList from "../components/MovieList"
 
