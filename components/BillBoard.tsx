@@ -5,8 +5,6 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 
 const BillBoard = () => {
   const { data, error, isLoading } = useBillBoard();
-  console.log(data);
-
   return (
     <div className="relative h-[56.25vw]">
       <video
