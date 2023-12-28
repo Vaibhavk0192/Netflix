@@ -5,7 +5,16 @@ import PlayButton from "./PlayButton"
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 const BillBoard = () => {
+
+  //  const openModal=useInfoModal()
   const { data, error, isLoading } = useBillBoard();
+  // const handleOpenModel=useCallback(
+  //   () => {
+  //     openModal(data?.id);
+  //   },
+  //   [],
+  // )
+  
   return (
     <div className="relative h-[56.25vw]">
       <video
