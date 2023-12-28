@@ -6,9 +6,11 @@ import MovieList from "../components/MovieList";
 import { useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import useMovieList from "@/hooks/useMovieList";
+import useFavourites from "@/hooks/useFavourites";
 
 export default function Home() {
   const { data: movies = [] } = useMovieList();
+  const { data: favourites = [] } = useFavourites();
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -24,6 +26,7 @@ export default function Home() {
       <BillBoard />
       <div className="pb-40">
         <MovieList title="Trending Now" data={movies} />
+        <MovieList title="Trending Now" data={favourites} />
       </div>
     </>
   );

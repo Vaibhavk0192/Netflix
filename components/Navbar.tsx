@@ -5,10 +5,12 @@ import {BsChevronDown,BsSearch,BsBell} from "react-icons/bs"
 import MobileMenu from "./MobileMenu";
 import  {useState , useCallback,useEffect} from "react"
 
+
 // how much the use is going o scroll down
 const TOP_OFFSET=66;
 
 const Navbar = () => {
+
   const [ShowMobileMenu, setShowMobileMenu] = useState(false)
   const [ShowAccountMenu, setShowAccountMenu] = useState(false)
   const [ShowBackground, setShowBackground] = useState(false)
