@@ -3,6 +3,7 @@ import { BsFillPlayFill } from "react-icons/bs";
 import FavouriteButton from "./FavouriteButton";
 import { useRouter } from "next/navigation";
 import useInfoModal from "@/hooks/useInfoModal";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 interface MovieCardProps {
   data: Record<string, any>;
 }
@@ -37,12 +38,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
               <BsFillPlayFill size={30} />
             </div>
             <FavouriteButton movieId={data?.id} />
-            {/* implement button of description */}
-            <div onClick={() => openModal(data && data?.id)}>desc</div>
-            <span className="text-white text-[10px] lg:text-[20px]">
-              {data.title}
-            </span>
+            <AiOutlineInfoCircle onClick={() => openModal(data && data?.id)} size={25} className="text-white"/>
           </div>
+          <span className="text-white text-[10px] lg:text-[20px]">
+              {data.title} 
+            </span>
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">2023</span>
           </p>
