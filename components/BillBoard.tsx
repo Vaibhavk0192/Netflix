@@ -8,7 +8,7 @@ import useInfoModal from "@/hooks/useInfoModal";
 const BillBoard = () => {
   const { openModal } = useInfoModal();
   const { data, error, isLoading } = useBillBoard();
-
+  
   const handleOpenModel = useCallback(() => {
     openModal(data&&data[0]?.id);
   }, [openModal, data&&data[0]?.id]);
