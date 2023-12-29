@@ -26,7 +26,7 @@ export default function Home() {
       <BillBoard />
       <div className="pb-40">
         <MovieList title="Trending Now" data={movies} />
-        <MovieList title="My List" data={favourites} />
+        <MovieList title="My List" data={favourites.favouriteMovies} />
       </div>
     </>
   );
