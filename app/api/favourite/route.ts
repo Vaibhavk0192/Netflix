@@ -54,12 +54,22 @@ export async function DELETE(req: Request) {
       });
 
       if (!existingMovie) {
-        throw new Error(`invalid movie ID`);
+        throw new Error(`Invalid movie ID`);
       }
 
-      const updateFavouritesIds = without(currentUser.favouriteIds, movieId);
+      const user = await prismadb.user.findUnique({
+        where: {
+          email: currentUser.email || "",
+        },
+      });
 
-      const updatedUser = prismadb.user.update({
+      if (!user) {
+        throw new Error(`User not found`);
+      }
+
+      const updateFavouritesIds = without(user.favouriteIds, movieId);
+
+      const updatedUser = await prismadb.user.update({
         where: {
           email: currentUser.email || "",
         },
@@ -67,11 +77,13 @@ export async function DELETE(req: Request) {
           favouriteIds: updateFavouritesIds,
         },
       });
+
       return NextResponse.json(updatedUser, { status: 200 });
     }
+
     return NextResponse.json({ status: 405 });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json({ status: 400 });
   }
 }
