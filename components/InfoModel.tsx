@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import PlayButton from "./PlayButton";
 import FavouriteButton from "./FavouriteButton";
-// import useInfoModal from "@/hooks/useInfoModal"
+import useInfoModal from "@/hooks/useInfoModal";
+import useMovie from "@/hooks/useMovie";
 
 interface InfoModelProps {
   visible?: boolean;
@@ -10,7 +11,10 @@ interface InfoModelProps {
 }
 
 const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
-  const [isVisible, setisVisible] = useState(!!visible); // to turn it into boolean we use !!
+  const [isVisible, setIsVisible] = useState(!!visible); // to turn it into boolean we use !!
+  const { movieId } = useInfoModal();
+  console.log(movieId);
+  const { data = {} } = useMovie(movieId);
 
   useEffect(() => {
     setIsVisible(!!visible);
