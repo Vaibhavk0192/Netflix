@@ -1,13 +1,15 @@
 import React, { useCallback } from "react";
 import { BsFillPlayFill } from "react-icons/bs";
-import FavouriteButton from "./FavouriteButton"
-import { useRouter } from 'next/navigation';
+import FavouriteButton from "./FavouriteButton";
+import { useRouter } from "next/navigation";
+import useInfoModal from "@/hooks/useInfoModal";
 interface MovieCardProps {
-  data: Record<string,any>;
+  data: Record<string, any>;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
-  const router =useRouter()
+  const {openModal} = useInfoModal();
+  const router = useRouter();
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
       <img
@@ -30,14 +32,16 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           <div className="flex flex-row items-center gap-3">
             <div
               onClick={() => router.push(`/watch/${data?.id}`)}
-              className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300" 
+              className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300"
             >
               <BsFillPlayFill size={30} />
             </div>
-              <FavouriteButton movieId={data?.id}/>
+            <FavouriteButton movieId={data?.id} />
+            {/* implement button of description */}
+            <div onClick={() => openModal(data && data?.id)}>desc</div>
             <span className="text-white text-[10px] lg:text-[20px]">
-                {data.title}
-              </span>
+              {data.title}
+            </span>
           </div>
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">2023</span>
