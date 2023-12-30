@@ -4,6 +4,7 @@ import PlayButton from "./PlayButton";
 import FavouriteButton from "./FavouriteButton";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovie from "@/hooks/useMovie";
+import { GiSpeaker , GiSpeakerOff} from "react-icons/gi"
 
 interface InfoModelProps {
   visible?: boolean;
@@ -15,6 +16,12 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
   const { movieId } = useInfoModal();
   console.log(movieId);
   const { data = {} } = useMovie(movieId);
+  const[isMuted,setisMuted]=useState(true)
+
+  const toggleMute=()=>{
+    setisMuted((prev)=>!prev)
+  }
+  
 
   useEffect(() => {
     setIsVisible(!!visible);
@@ -43,7 +50,7 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
             <video
               poster={data?.thumbnailUrl}
               autoPlay
-              muted
+              muted={isMuted}
               loop
               src={data?.videoUrl}
               className="w-full brightness-[60%] object-cover h-full"
@@ -54,13 +61,19 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
             >
               <AiOutlineClose className="text-white w-6" />
             </div>
-            <div className="absolute bottom-[10%] left-10 w-[40%]">
+            <div className="absolute bottom-[10%] left-10 w-[90%]">
               <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-8">
                 {data?.title}
               </p>
               <div className="flex flex-row gap-4 items-center ">
                 <PlayButton movieId={data?.id} />
                 <FavouriteButton movieId={data?.id} />
+                <div
+           onClick={toggleMute}
+              className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 border border-white rounded-full flex justify-center items-center transition hover:border-neutral-300 ml-[65%]"
+            >
+              {isMuted ? <GiSpeakerOff size={30} className="text-white"/> : <GiSpeaker size={30} className="text-white" />}
+            </div>
               </div>
             </div>
           </div>
