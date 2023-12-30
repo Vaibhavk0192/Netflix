@@ -10,8 +10,8 @@ interface MainBannerProps {
 
 const MainBanner: React.FC<MainBannerProps> = ({ email, handleEmail }) => {
   return (
-    <div>
-      <div className="relative h-full w-full bg-[url('/images/banner.jpg')] bg-no-repeat bg-fixed bg-cover ">
+    <div className="">
+      <div className="relative h-[100vh] w-full bg-[url('/images/banner.jpg')] bg-no-repeat bg-fixed bg-cover ">
         <div className=" w-full h-full bg-opacity-70 bg-black ">
           <nav className="flex justify-between lg:px-44 w-full  lg:py-6 sm: px-4  sm: py-4">
             <img src="/images/logo.png" alt="logo" className=" h-10  " />

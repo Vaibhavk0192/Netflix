@@ -36,9 +36,7 @@ export default function Home() {
         <MovieList title="Trending Now" data={movies} />
         <MovieList title="My List" data={favourites.favouriteMovies} />
       </div>
-      <Feature4/>
-      <FrequentQues/>
-      <FooterHome/>
+
     </>
   );
 }
