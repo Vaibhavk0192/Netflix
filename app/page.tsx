@@ -10,9 +10,6 @@ import useFavourites from "@/hooks/useFavourites";
 import InfoModel from "@/components/InfoModel";
 import useInfoModal from "@/hooks/useInfoModal";
 
-import FooterHome from "../components/Landing Page/footer"
-import FrequentQues from "../components/Landing Page/FrequeuntQues"
-import Feature4 from "../components/Landing Page/Feature4"
 
 export default function Home() {
   const { data: movies = [] } = useMovieList();
