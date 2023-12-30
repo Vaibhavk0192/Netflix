@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
-import { BsFillPlayFill } from "react-icons/bs";
+import { BsFillPlayFill,BsChevronDown } from "react-icons/bs";
 import FavouriteButton from "./FavouriteButton";
 import { useRouter } from "next/navigation";
 import useInfoModal from "@/hooks/useInfoModal";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+
 interface MovieCardProps {
   data: Record<string, any>;
 }
@@ -37,14 +38,16 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             >
               <BsFillPlayFill size={30} />
             </div>
-            <FavouriteButton movieId={data?.id} />
-            <AiOutlineInfoCircle onClick={() => openModal(data && data?.id)} size={25} className="text-white"/>
+            <FavouriteButton  movieId={data?.id} />
+            <div
+              className=" cursor-pointer w-6 h-6 lg:w-10 lg:h-10 border-2 border-white rounded-full flex justify-center items-center transition hover:bg-neutral-300 ml-[55%]"
+            >
+            <BsChevronDown onClick={() => openModal(data && data?.id)} size={25} className="text-white "/>
+            </div>
+            
           </div>
-          <span className="text-white text-[10px] lg:text-[20px]">
-              {data.title} 
-            </span>
-          <p className="text-green-400 font-semibold mt-4">
-            New <span className="text-white">2023</span>
+          <p className="text-green-400 font-semibold mt-4 ">
+            New Match<span className="text-white ml-1">2023</span>
           </p>
           <div className="flex flex-row mt-3 gap-2 items-center">
             <p className="text-white text-[10px] lg:text-sm">{data.duration}</p>

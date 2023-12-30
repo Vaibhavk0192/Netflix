@@ -4,12 +4,13 @@ import NavbarItem from "./NavbarItems"
 import {BsChevronDown,BsSearch,BsBell} from "react-icons/bs"
 import MobileMenu from "./MobileMenu";
 import  {useState , useCallback,useEffect} from "react"
-
+import { useSession } from "next-auth/react";
 
 // how much the use is going o scroll down
 const TOP_OFFSET=66;
 
 const Navbar = () => {
+  const { data: session, status } = useSession()
 
   const [ShowMobileMenu, setShowMobileMenu] = useState(false)
   const [ShowAccountMenu, setShowAccountMenu] = useState(false)
@@ -47,7 +48,7 @@ const Navbar = () => {
   return (
     <nav className="w-full fixed z-40">
       <div className={`px-4 md:px-4 py-6 flex flex-row items-center transition duration-500 ${ShowBackground ? 'bg-zinc-900 bg-opacity-90' : ''}`}>
-        <img className="h-4 lg:h-7" src="/images/logo.png" alt="logo" />
+        <img className="h-4 lg:h-7 ml-12" src="/images/logo.png" alt="logo" />
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
             <NavbarItem label="Home"/>
             <NavbarItem label="Series"/>
@@ -61,10 +62,11 @@ const Navbar = () => {
             <BsChevronDown className={`text-white transition ${ShowMobileMenu ? "rotate-180":"rotate-0"}`}/>
             <MobileMenu visible={ShowMobileMenu}/>
         </div>
-        <div className="flex flex-row ml-auto mr-4 gap-7 items-center">
+        <div className="flex flex-row ml-auto mr-12 gap-7 items-center">
             <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
                 <BsSearch/>
             </div>
+            <span className="text-white">{session?.user?.name}</span>
             <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BsBell/>
             </div>

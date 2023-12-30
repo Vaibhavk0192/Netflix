@@ -33,13 +33,13 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
 
   return (
     <div className="z-50 transition duration-300 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0">
-      <div className="relative w-auto mx-auto max-w-3xl rounded-md overflow-hidden">
+      <div className="relative w-full mx-auto max-w-3xl rounded-md overflow-hidden">
         <div
           className={`${
             isVisible ? "scale-100" : "scale-0"
-          } transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md`}
+          } transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md w-full`}
         >
-          <div className="relative h-96">
+          <div className="relative h-96 w-full">
             <video
               poster={data?.thumbnailUrl}
               autoPlay
@@ -54,11 +54,11 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
             >
               <AiOutlineClose className="text-white w-6" />
             </div>
-            <div className="absolute bottom-[10%] left-10">
+            <div className="absolute bottom-[10%] left-10 w-[40%]">
               <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-8">
                 {data?.title}
               </p>
-              <div className="flex flex-row gap-4 items-center">
+              <div className="flex flex-row gap-4 items-center ">
                 <PlayButton movieId={data?.id} />
                 <FavouriteButton movieId={data?.id} />
               </div>

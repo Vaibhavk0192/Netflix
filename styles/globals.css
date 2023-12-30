@@ -3,8 +3,12 @@
 @tailwind components;
 
 body{
-  @apply bg-zinc-900 h-full overflow-x-hidden;
+  @apply bg-zinc-900 h-full overflow-x-hidden overflow-y-scroll;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
+
 
 #__next{
   @apply h-full;
