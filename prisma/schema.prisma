@@ -8,16 +8,16 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  id             String     @id @default(auto()) @map("_id") @db.ObjectId
   name           String?
   image          String
-  email          String?   @unique
+  email          String?    @unique
   emailVerified  DateTime?
   hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  favouriteIds   String[]  @db.ObjectId
-  likedIds       String[]  @db.ObjectId
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  favouriteIds   String[]
+  profile        Profiles[]
   sessions       Session[]
   accounts       Account[]
 }
@@ -69,6 +69,14 @@ model Movie {
   cast           String
   tag            String
   tagDescription String
-  movieTag       String
-  year           String
+}
+
+model Profiles {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  imageUrl    String
+  favourites  String[]
+  likedMovies String[]
+  userId      String?  @db.ObjectId
+  User        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
