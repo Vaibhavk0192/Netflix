@@ -5,7 +5,9 @@ import FavouriteButton from "./FavouriteButton";
 import { useRouter } from "next/navigation";
 import useInfoModal from "@/hooks/useInfoModal";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import HDIcon from "./Icons component/HD"
+import HDIcon from "./Icons component/HD";
+import Tag from "./Icons component/Tag"
+
 
 interface MovieCardProps {
   data: Record<string, any>;
@@ -29,14 +31,15 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           src={data.thumbnailUrl}
           alt="Movie"
           draggable={false}
-          className=" cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-[12vw]"
+          className=" cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-[18vw]"
         />
 
-        <div className=" z-10 bg-zinc-800 p-2 lg:p-4 absolute w-full transition shadow-md rounded-b-md ">
-          <div className="flex flex-row items-center gap-3">
+        <div className=" z-10 bg-zinc-800 sm:p-2 lg:p-4 absolute w-full transition shadow-md rounded-b-md ">
+          <div className="flex flex-row items-center justify-between ">
+            <div className="flex flex-row items-center gap-3">
             <div
               onClick={() => router.push(`/watch/${data?.id}`)}
-              className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300"
+              className="cursor-pointer sm:w-6 sm:h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300"
             >
               <BsFillPlayFill size={35} />
             </div>
@@ -45,15 +48,16 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 
             <div
               onClick={() => router.push(`/watch/${data?.id}`)}
-              className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10  border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300"
+              className="cursor-pointer sm:w-6 sm:h-6 lg:w-10 lg:h-10  border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300"
             >
               <FaThumbsUp
                 size={20}
                 className="text-white hover:text-neutral-300 "
               />
             </div>
+            </div>
 
-            <div className=" cursor-pointer w-6 h-6 lg:w-10 lg:h-10 border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300 ml-32">
+            <div className=" cursor-pointer sm:w-6 sm:h-6 lg:w-10 lg:h-10 border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300">
               <BsChevronDown
                 onClick={() => openModal(data && data?.id)}
                 size={25}
@@ -61,17 +65,17 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
               />
             </div>
           </div>
-          <div className="flex mt-4 items-center">
-          <span className="text-green-400 font-semibold">97% Match</span>
-            <span className="text-white text-[10px] lg:text-sm">{data.duration}</span>
-          <HDIcon/>
+          <div className="flex flex-wrap mt-6 w-full items-center gap-2 items-center">
+            <span className="text-green-400 font-semibold lg:text-[15px] sm:text-[px]">
+              97% Match
+            </span>
+            <Tag tag={data.tag}/>
+            <span className="text-white text-[10px] lg:text-sm">
+              {data.duration}
+            </span>
+            <HDIcon />
           </div>
-          
-          
-
-          <div className="flex flex-row items-center gap-2 mt-3 text-[8px] text-white lg:text-sm">
-            <p>{data.genre}{data.year}</p>
-          </div>
+          <p className="text-white text-sm mt-4">{data.tagDescription}</p>
         </div>
       </div>
     </div>

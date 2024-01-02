@@ -1,7 +1,7 @@
 import useBillBoard from "@/hooks/useBillBoard";
-import React, { useCallback ,useState} from "react";
+import React, { useCallback, useState } from "react";
 import PlayButton from "./PlayButton";
-import { GiSpeaker , GiSpeakerOff} from "react-icons/gi"
+import { GiSpeaker, GiSpeakerOff } from "react-icons/gi";
 
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import useInfoModal from "@/hooks/useInfoModal";
@@ -10,16 +10,15 @@ const BillBoard = () => {
   const { openModal } = useInfoModal();
   const { data, error, isLoading } = useBillBoard();
 
-  const[isMuted,setisMuted]=useState(true)
+  const [isMuted, setisMuted] = useState(true);
 
-  const toggleMute=()=>{
-    setisMuted((prev)=>!prev)
-  }
-  
-  
+  const toggleMute = () => {
+    setisMuted((prev) => !prev);
+  };
+
   const handleOpenModel = useCallback(() => {
-    openModal(data&&data[0]?.id);
-  }, [openModal, data&&data[0]?.id]);
+    openModal(data && data[0]?.id);
+  }, [openModal, data && data[0]?.id]);
 
   return (
     <div className="relative h-[95%] mb-5">
@@ -38,8 +37,9 @@ const BillBoard = () => {
         <p className="text-white text-[8px] md:text-lg mt-6 w-[90%] md:w-[80%] lg:w-[50%] drop-shadow-xl">
           {!isLoading ? data[0]?.description : ""}
         </p>
-        <div className="flex flex-row items-center mt-6 ">
-          <PlayButton movieId={ data&&data[0]?.id} />
+        <div className="flex flex-row items-center mt-6 justify-between pr-20">
+          <div className="flex flex-row items-center">
+          <PlayButton movieId={data && data[0]?.id} />
           <button
             onClick={handleOpenModel}
             className="
@@ -57,17 +57,27 @@ const BillBoard = () => {
               justify-center
               hover:bg-opacity-20
               transition
-              ml-3 "   
+              ml-3 "
           >
-            <AiOutlineInfoCircle className="w-4 md:w-7 mr-2 font-bold" size={30} />
+            <AiOutlineInfoCircle
+              className="w-4 md:w-7 mr-2 font-bold"
+              size={30}
+            />
             More Info
           </button>
-          <div
-           onClick={toggleMute}
-              className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 border border-white rounded-full flex justify-center items-center transition hover:border-neutral-300 ml-[71%]"
+          </div>
+          <div>
+            <div
+              onClick={toggleMute}
+              className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 border border-white rounded-full flex justify-center items-center transition hover:border-neutral-300"
             >
-              {isMuted ? <GiSpeakerOff size={30} className="text-white"/> : <GiSpeaker size={30} className="text-white" />}
+              {isMuted ? (
+                <GiSpeakerOff size={30} className="text-white" />
+              ) : (
+                <GiSpeaker size={30} className="text-white" />
+              )}
             </div>
+          </div>
         </div>
       </div>
     </div>
