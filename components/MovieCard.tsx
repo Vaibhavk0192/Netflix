@@ -5,9 +5,7 @@ import FavouriteButton from "./FavouriteButton";
 import { useRouter } from "next/navigation";
 import useInfoModal from "@/hooks/useInfoModal";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import HDIcon from "./Icons component/HD";
-import Tag from "./Icons component/Tag"
-
+import MovieDesc from "./Icons component/movieDesc"
 
 interface MovieCardProps {
   data: Record<string, any>;
@@ -65,16 +63,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
               />
             </div>
           </div>
-          <div className="flex flex-wrap mt-6 w-full items-center gap-2 items-center">
-            <span className="text-green-400 font-semibold lg:text-[15px] sm:text-[px]">
-              97% Match
-            </span>
-            <Tag tag={data.tag}/>
-            <span className="text-white text-[10px] lg:text-sm">
-              {data.duration}
-            </span>
-            <HDIcon />
-          </div>
+          <MovieDesc tag={data.tag} duration={data.duration}/>
           <p className="text-white text-sm mt-4">{data.tagDescription}</p>
         </div>
       </div>
