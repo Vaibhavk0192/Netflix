@@ -69,6 +69,7 @@ model Movie {
   cast           String
   tag            String
   tagDescription String
+  year           String
 }
 
 model Profiles {

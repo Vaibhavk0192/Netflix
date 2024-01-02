@@ -11,6 +11,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({movieId}) => {
     <button
       onClick={() => router.push(`/watch/${movieId}`)}
       className=" bg-white 
+     px-2 md:px-4
     rounded-md 
     text-xs lg:text-lg 
     font-semibold

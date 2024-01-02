@@ -1,16 +1,18 @@
 import React, { useCallback } from "react";
-import { BsFillPlayFill,BsChevronDown } from "react-icons/bs";
+import { BsFillPlayFill, BsChevronDown } from "react-icons/bs";
+import { FaThumbsUp } from "react-icons/fa";
 import FavouriteButton from "./FavouriteButton";
 import { useRouter } from "next/navigation";
 import useInfoModal from "@/hooks/useInfoModal";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import HDIcon from "./Icons component/HD"
 
 interface MovieCardProps {
   data: Record<string, any>;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
-  const {openModal} = useInfoModal();
+  const { openModal } = useInfoModal();
   const router = useRouter();
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
@@ -36,24 +38,39 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
               onClick={() => router.push(`/watch/${data?.id}`)}
               className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300"
             >
-              <BsFillPlayFill size={30} />
+              <BsFillPlayFill size={35} />
             </div>
-            <FavouriteButton  movieId={data?.id} />
+
+            <FavouriteButton movieId={data?.id} />
+
             <div
-              className=" cursor-pointer w-6 h-6 lg:w-10 lg:h-10 border-2 border-white rounded-full flex justify-center items-center transition hover:bg-neutral-300 ml-[55%]"
+              onClick={() => router.push(`/watch/${data?.id}`)}
+              className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10  border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300"
             >
-            <BsChevronDown onClick={() => openModal(data && data?.id)} size={25} className="text-white "/>
+              <FaThumbsUp
+                size={20}
+                className="text-white hover:text-neutral-300 "
+              />
             </div>
-            
+
+            <div className=" cursor-pointer w-6 h-6 lg:w-10 lg:h-10 border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300 ml-32">
+              <BsChevronDown
+                onClick={() => openModal(data && data?.id)}
+                size={25}
+                className="text-white hover:text-neutral-300 "
+              />
+            </div>
           </div>
-          <p className="text-green-400 font-semibold mt-4 ">
-            New Match<span className="text-white ml-1">2023</span>
-          </p>
-          <div className="flex flex-row mt-3 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">{data.duration}</p>
+          <div className="flex mt-4 items-center">
+          <span className="text-green-400 font-semibold">97% Match</span>
+            <span className="text-white text-[10px] lg:text-sm">{data.duration}</span>
+          <HDIcon/>
           </div>
+          
+          
+
           <div className="flex flex-row items-center gap-2 mt-3 text-[8px] text-white lg:text-sm">
-            <p>{data.genre}</p>
+            <p>{data.genre}{data.year}</p>
           </div>
         </div>
       </div>

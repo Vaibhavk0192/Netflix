@@ -57,9 +57,7 @@ const BillBoard = () => {
               justify-center
               hover:bg-opacity-20
               transition
-              ml-3 
-              w-[12%]"
-              
+              ml-3 "   
           >
             <AiOutlineInfoCircle className="w-4 md:w-7 mr-2 font-bold" size={30} />
             More Info
