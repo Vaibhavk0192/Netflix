@@ -70,4 +70,5 @@ model Movie {
   tag            String
   tagDescription String
   movieTag       String
+  year           String
 }
