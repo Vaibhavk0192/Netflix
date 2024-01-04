@@ -11,15 +11,34 @@ export async function POST(req: Request) {
       const { currentUser } = await serverAuth();
       const { imageUrl, name } = await req.json();
 
-      const profile = await prismadb.profiles.create({
+      if (currentUser.profile){
+        
+      }
+
+      const profileData = await prismadb.profiles.create({
         data: {
           name: name,
-          imageUrl: imageUrl,
+          imageUrl: imageUrl, 
           userId: currentUser.id,
         },
       });
+      console.log(profileData);
+      let profileList = [profileData.id];
+      console.log(profileList);
 
-      return NextResponse.json(profile, { status: 200 });
+      profileList.push(profileData.id);
+      const userUpdated = await prismadb.user.update({
+        where: {
+          email: currentUser.email || "",
+        },
+        data: {
+          profile: {
+            push: profileList,
+          },
+        },
+      });
+
+      return NextResponse.json(userUpdated, { status: 200 });
     }
     return NextResponse.json({ status: 405 });
   } catch (err) {
@@ -32,16 +51,16 @@ export async function DELETE(req: Request) {
   try {
     if (req.method === "DELETE") {
       const { currentUser } = await serverAuth();
-      const { movieId } = await req.json();
+      const { ProfileId } = await req.json();
 
-      const existingMovie = await prismadb.movie.findUnique({
+      const existingProfile = await prismadb.profiles.findUnique({
         where: {
-          id: movieId,
+          id: ProfileId,
         },
       });
 
-      if (!existingMovie) {
-        throw new Error(`Invalid movie ID`);
+      if (!existingProfile) {
+        throw new Error(`Invalid Profile ID`);
       }
 
       const user = await prismadb.user.findUnique({
@@ -54,14 +73,14 @@ export async function DELETE(req: Request) {
         throw new Error(`User not found`);
       }
 
-      const updateFavouritesIds = without(user.favouriteIds, movieId);
+      const updatedProfile = without(user.profile, ProfileId);
 
       const updatedUser = await prismadb.user.update({
         where: {
           email: currentUser.email || "",
         },
         data: {
-          favouriteIds: updateFavouritesIds,
+          profile: updatedProfile,
         },
       });
 

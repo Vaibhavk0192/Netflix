@@ -7,9 +7,13 @@ import useFavourites from "@/hooks/useFavourites";
 
 interface FavouriteButtonProps {
   movieId: string;
+  profile: string;
 }
 
-const FavouriteButton: React.FC<FavouriteButtonProps> = ({ movieId }) => {
+const FavouriteButton: React.FC<FavouriteButtonProps> = ({
+  movieId,
+  profile,
+}) => {
   const { mutate: mutateFavourites } = useFavourites();
   const { data: currentUser, mutate } = userCurrentUser();
 

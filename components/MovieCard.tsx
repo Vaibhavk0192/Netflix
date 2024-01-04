@@ -7,9 +7,10 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 
 interface MovieCardProps {
   data: Record<string, any>;
+  profile: string;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ data,profile }) => {
   const {openModal} = useInfoModal();
   const router = useRouter();
   return (
@@ -38,7 +39,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             >
               <BsFillPlayFill size={30} />
             </div>
-            <FavouriteButton  movieId={data?.id} />
+            <FavouriteButton  movieId={data?.id} profile={profile} />
             <div
               className=" cursor-pointer w-6 h-6 lg:w-10 lg:h-10 border-2 border-white rounded-full flex justify-center items-center transition hover:bg-neutral-300 ml-[55%]"
             >

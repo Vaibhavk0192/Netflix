@@ -9,14 +9,12 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ status: 405 });
     }
     const { currentUser } = await serverAuth();
-    const Profiles = await prismadb.user.findMany({
+    const User = await prismadb.profiles.findMany({
       where: {
-        id: {
-          in: currentUser?.profile,
-        },
+        userId: currentUser.id, 
       },
     });
-    return NextResponse.json({ Profiles, status: 200 });
+    return NextResponse.json({ User, status: 200 });
   } catch (err) {
     console.log(err);
     return NextResponse.json({ status: 400 });

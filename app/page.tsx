@@ -1,38 +1,57 @@
-"use client";
-import Navbar from "../components/Navbar";
-import BillBoard from "../components/BillBoard";
-import MovieList from "../components/MovieList";
+  "use client";
 
-import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import useMovieList from "@/hooks/useMovieList";
-import useFavourites from "@/hooks/useFavourites";
-import InfoModel from "@/components/InfoModel";
-import useInfoModal from "@/hooks/useInfoModal";
+import GetStarted from "@/components/GetStarted";
+import Feature from "@/components/Landing Page/Feature4";
+import FrequentQues from "@/components/Landing Page/FrequeuntQues";
+import FooterHome from "@/components/Landing Page/footer";
+import MainBanner from "@/components/MainBanner";
+import InputEmail from "@/components/inputEmail";
+import { ChangeEvent, useEffect, useState } from "react";
 
+const Landing = () => {
+  const [email, setEmail] = useState("");
+  const handleSetEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
 
-export default function Home() {
-  const { data: movies = [] } = useMovieList();
-  const { data: favourites = [] } = useFavourites();
-  const { isOpen, closeModal } = useInfoModal();
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/auth");
-    },
-  });
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
   return (
     <>
-      <InfoModel visible={isOpen} onClose={closeModal} />
-      <Navbar />
-      <BillBoard />
-      <div className="pb-40">
-        <MovieList title="Trending Now" data={movies} />
-        <MovieList title="My List" data={favourites.favouriteMovies} />
+      <MainBanner email={email} handleEmail={handleSetEmail} />
+      <Feature
+        text1="Enjoy on your TV"
+        text2="Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more."
+        image="/images/feature1.png"
+      />
+      <Feature
+        text1="Download your shows to watch offline"
+        text2="Save your favourites easily and always have something to watch."
+        image="/images/feature2.jpg"
+      />
+      <Feature
+        text1="Watch everywhere"
+        text2="Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV."
+        image="/images/feature3.png"
+      />
+      <Feature
+        text1="Create profiles for kids"
+        text2="Send children on adventures with their favourite characters in a
+              space made just for them—free with your membership."
+        image="/images/feature4.png"
+      />
+      <FrequentQues />
+      <div className="bg-[#000000] pb-10 flex flex-row flex-wrap justify-center items-center gap-2">
+        <InputEmail
+          label="Email address"
+          onChange={handleSetEmail}
+          id="email"
+          type="email"
+          value={email}
+        />
+        <GetStarted />
       </div>
+      <FooterHome />
     </>
   );
-}
+};
+
+export default Landing;
