@@ -9,10 +9,11 @@ import MovieDesc from "./Icons component/movieDesc"
 
 interface MovieCardProps {
   data: Record<string, any>;
+  profile: string;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
-  const { openModal } = useInfoModal();
+const MovieCard: React.FC<MovieCardProps> = ({ data,profile }) => {
+  const {openModal} = useInfoModal();
   const router = useRouter();
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
@@ -41,9 +42,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             >
               <BsFillPlayFill size={35} />
             </div>
-
-            <FavouriteButton movieId={data?.id} />
-
+            <FavouriteButton  movieId={data?.id} profile={profile} />
             <div
               onClick={() => router.push(`/watch/${data?.id}`)}
               className="cursor-pointer sm:w-6 sm:h-6 lg:w-10 lg:h-10  border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300"

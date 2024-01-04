@@ -17,9 +17,10 @@ model User {
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
   favouriteIds   String[]
-  profile        Profiles[]
+  profile        String[]
   sessions       Session[]
   accounts       Account[]
+  Profiles       Profiles[]
 }
 
 model Account {
@@ -78,6 +79,6 @@ model Profiles {
   imageUrl    String
   favourites  String[]
   likedMovies String[]
-  userId      String?  @db.ObjectId
+  userId      String   @db.ObjectId
   User        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

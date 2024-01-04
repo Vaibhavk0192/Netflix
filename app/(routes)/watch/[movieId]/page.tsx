@@ -7,10 +7,9 @@ import { useParams } from "next/navigation";
 import useMovie from "@/hooks/useMovie";
 
 const Watch = () => {
+  
   const params = useParams<{ movieId: string }>();
-
   const movieId = params.movieId;
-
   const { data } = useMovie(movieId);
   console.log(data);
 

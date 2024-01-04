@@ -5,10 +5,11 @@ import MovieCard from "./MovieCard";
 interface MovieListProps {
   data: Record<string, any>[];
   title: string;
+  profile: string;
 }
 
-const MovieList: React.FC<MovieListProps> = ({ data, title }) => {  
-  if (!Array.isArray(data) ||isEmpty(data)) {
+const MovieList: React.FC<MovieListProps> = ({ data, title, profile }) => {
+  if (!Array.isArray(data) || isEmpty(data)) {
     return null;
   }
   return (
@@ -19,7 +20,7 @@ const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
         </p>
         <div className="grid grid-cols-4 gap-2 mb-10">
           {data.map((movie) => (
-            <MovieCard key={movie.id} data={movie} />
+            <MovieCard key={movie.id} data={movie} profile={profile} />
           ))}
         </div>
       </div>
