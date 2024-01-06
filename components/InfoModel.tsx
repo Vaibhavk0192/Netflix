@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import PlayButton from "./PlayButton";
-import FavouriteButton from "./FavouriteButton";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovie from "@/hooks/useMovie";
 import { GiSpeaker, GiSpeakerOff } from "react-icons/gi";
 import { LuSubtitles } from "react-icons/lu";
 import HDTag from "./Icons component/HD";
 import Tag from "./Icons component/Tag";
-import ADTag from "./Icons component/ADTAG"
+import ADTag from "./Icons component/ADTAG";
 
 interface InfoModelProps {
   visible?: boolean;
@@ -18,7 +17,6 @@ interface InfoModelProps {
 const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible); // to turn it into boolean we use !!
   const { movieId } = useInfoModal();
-  console.log(movieId);
   const { data = {} } = useMovie(movieId);
   const [isMuted, setisMuted] = useState(true);
 
@@ -71,7 +69,6 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
               <div className="flex flex-row items-center justify-between">
                 <div className="flex flex-row gap-4 items-center">
                   <PlayButton movieId={data?.id} />
-                  <FavouriteButton movieId={data?.id} />
                 </div>
                 <div
                   onClick={toggleMute}
@@ -102,7 +99,7 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
                 <span>{data.year}</span>
                 <span>{data.duration}</span>
                 <HDTag />
-                <ADTag/>
+                <ADTag />
                 <LuSubtitles size={25} />
               </div>
               <div className="flex flex-row flex-wrap mt-4 gap-3">
@@ -118,14 +115,16 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
             </div>
 
             <div className="basis-2/6 flex flex-col text-sm pl-8">
-               <div className="flex flex-row items-start ">
-                <span >Cast:
-                <span className="ml-4 text-white">{data.cast}</span></span>
-               </div>
-               <div className="flex flex-row items-start gap-3 mt-4">
+              <div className="flex flex-row items-start ">
+                <span>
+                  Cast:
+                  <span className="ml-4 text-white">{data.cast}</span>
+                </span>
+              </div>
+              <div className="flex flex-row items-start gap-3 mt-4">
                 <span>Genre:</span>
                 <span className="text-white">{data.genre}</span>
-               </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,15 +1,15 @@
 import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 import serverAuth from "@/lib/serverAuth";
 import { without } from "lodash";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     if (req.method === "POST") {
-      const { currentUser } = await serverAuth();
-      const { movieId } = await req.json();
+      await serverAuth();
+      const { movieId, profile } = await req.json();
 
       const existingMovie = await prismadb.movie.findUnique({
         where: {
@@ -21,12 +21,12 @@ export async function POST(req: Request) {
         throw new Error(`invalid movie ID`);
       }
 
-      const user = await prismadb.user.update({
+      const user = await prismadb.profiles.update({
         where: {
-          email: currentUser.email || "",
+          id: profile || "",
         },
         data: {
-          favouriteIds: {
+          favourites: {
             push: movieId,
           },
         },
@@ -44,8 +44,7 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   try {
     if (req.method === "DELETE") {
-      const { currentUser } = await serverAuth();
-      const { movieId } = await req.json();
+      const { movieId,profile } = await req.json();
 
       const existingMovie = await prismadb.movie.findUnique({
         where: {
@@ -57,24 +56,24 @@ export async function DELETE(req: Request) {
         throw new Error(`Invalid movie ID`);
       }
 
-      const user = await prismadb.user.findUnique({
+      const user = await prismadb.profiles.findUnique({
         where: {
-          email: currentUser.email || "",
+          id: profile || "",
         },
       });
 
       if (!user) {
-        throw new Error(`User not found`);
+        throw new Error(`Profile id not found`);
       }
 
-      const updateFavouritesIds = without(user.favouriteIds, movieId);
+      const updateFavouritesIds = without(user.favourites, movieId);
 
-      const updatedUser = await prismadb.user.update({
+      const updatedUser = await prismadb.profiles.update({
         where: {
-          email: currentUser.email || "",
+          id: profile || "",
         },
         data: {
-          favouriteIds: updateFavouritesIds,
+          favourites: updateFavouritesIds,
         },
       });
 

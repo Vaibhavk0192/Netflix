@@ -1,9 +1,9 @@
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
-const useFavourites = () => {
+const useFavourites = (id?: string) => {
   const { data, error, isLoading, mutate } = useSWR(
-    "/api/favourites",
+    id ? `/api/favourites/${id}` : null,
     fetcher,
     {
       revalidateIfStale: false,
@@ -11,7 +11,7 @@ const useFavourites = () => {
       revalidateOnReconnect: false,
     }
   );
-  return { data, error, isLoading,mutate };
+  return { data, error, isLoading, mutate };
 };
 
 export default useFavourites;

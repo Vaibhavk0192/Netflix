@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useMemo } from "react";
 import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
-
-import userCurrentUser from "@/hooks/useCurrentuser";
+import useCurrentProfile from "@/hooks/useCurrentProfile";
 import useFavourites from "@/hooks/useFavourites";
 
 interface FavouriteButtonProps {
@@ -14,29 +13,68 @@ const FavouriteButton: React.FC<FavouriteButtonProps> = ({
   movieId,
   profile,
 }) => {
-  const { mutate: mutateFavourites } = useFavourites();
-  const { data: currentUser, mutate } = userCurrentUser();
+  const { data: favouritesIds, mutate } = useCurrentProfile(profile);
+  const { mutate: mutateFavourites } = useFavourites(profile);
 
   const isFavourite = useMemo(() => {
-    const list = currentUser?.currentUser?.favouriteIds || [];
+    const list = favouritesIds?.favourites || [];
     return list.includes(movieId);
-  }, [currentUser?.currentUser?.favouriteIds]);
+  }, [favouritesIds?.favourites]);
 
   const toggleFavourites = useCallback(async () => {
+    console.log(isFavourite);
     let response;
     if (isFavourite) {
-      response = await axios.delete("api/favourite", { data: { movieId } });
+      try {
+        response = await fetch("/api/favourite", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            movieId: movieId,
+            profile: profile,
+          }),
+        });
+        if (response) {
+          const res = await response.json();
+          console.log(res.favourites);
+          const updatedfavouriteIds = res?.favourites;
+          mutate({
+            ...favouritesIds,
+            favourites: updatedfavouriteIds,
+          });
+          mutateFavourites();
+        }
+      } catch (err) {
+        console.log(err);
+      }
     } else {
-      response = await axios.post("api/favourite", { movieId });
+      try {
+        response = await fetch("/api/favourite", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            movieId: movieId,
+            profile: profile,
+          }),
+        });
+        if (response) {
+          const res = await response.json();
+          const updatedfavouriteIds = res?.favourites;
+          mutate({
+            ...favouritesIds,
+            favourites: updatedfavouriteIds,
+          });
+          mutateFavourites();
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
-    const updatedfavouriteIds = response?.data?.favouriteIds;
-    mutate({
-      ...currentUser,
-      favouriteIds: updatedfavouriteIds,
-    });
-
-    mutateFavourites();
-  }, [movieId, isFavourite, currentUser, mutate, mutateFavourites]);
+  }, [movieId, isFavourite, mutate,mutateFavourites]);
 
   const Iconed = isFavourite ? AiOutlineCheck : AiOutlinePlus;
 
