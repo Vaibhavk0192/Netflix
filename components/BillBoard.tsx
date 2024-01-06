@@ -30,14 +30,14 @@ const BillBoard = () => {
         loop
         src={!isLoading ? data[0]?.videoUrl : ""}
       ></video>
-      <div className="absolute top-[50%] ml-4 md:ml-16 w-[95%] h-[30%]">
+      <div className="absolute top-[50%] w-full h-[30%] pl-16">
         <p className="text-white text-7xl h-[45%] font-bold drop-shadow-xl">
           {!isLoading ? data[0]?.title : ""}
         </p>
         <p className="text-white text-[8px] md:text-lg mt-6 w-[90%] md:w-[80%] lg:w-[50%] drop-shadow-xl">
           {!isLoading ? data[0]?.description : ""}
         </p>
-        <div className="flex flex-row items-center mt-6 justify-between pr-20">
+        <div className="flex flex-row items-center mt-6 justify-between">
           <div className="flex flex-row items-center">
           <PlayButton movieId={data && data[0]?.id} />
           <button
@@ -66,7 +66,7 @@ const BillBoard = () => {
             More Info
           </button>
           </div>
-          <div>
+          <div className="flex items-center gap-2 right-0">
             <div
               onClick={toggleMute}
               className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 border border-white rounded-full flex justify-center items-center transition hover:border-neutral-300"
@@ -77,6 +77,7 @@ const BillBoard = () => {
                 <GiSpeaker size={30} className="text-white" />
               )}
             </div>
+            <div className="text-white bg-black bg-opacity-35 pl-4  pr-10 py-1.5 border-l bottom-2">{!isLoading ? data[0]?.tag : ""}</div>
           </div>
         </div>
       </div>
