@@ -113,7 +113,7 @@ const Profile = () => {
           <div onClick={() => {}}>
             {profiles &&
               profiles.User.map((i: any) => (
-                <UserCard id={i.id} name={i.name} image={i.imageUrl} />
+                <UserCard key={i.id} id={i.id} name={i.name} image={i.imageUrl} />
               ))}
           </div>
         </div>
