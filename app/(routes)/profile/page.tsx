@@ -5,6 +5,8 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import Profilebuttons from "@/components/Profile manage page/profileButtons";
+import { FaPencilAlt } from "react-icons/fa";
 
 const images = [
   "/images/default-blue.png",
@@ -17,9 +19,10 @@ interface UserCardProps {
   name: string;
   image: string;
   id: string;
+  visible: string;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ name, image, id }) => {
+const UserCard: React.FC<UserCardProps> = ({ name, image, id, visible }) => {
   const router = useRouter();
   return (
     <div
@@ -28,13 +31,21 @@ const UserCard: React.FC<UserCardProps> = ({ name, image, id }) => {
         router.push(`/in/${id}`);
       }}
     >
-      <div className="w-25 h-25 rounded-md flex items-center justify-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden">
+      <div className="relative w-25 h-25 rounded-md flex items-center justify-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden">
         <img
           draggable={false}
           className="w-max h-max object-contain"
           src={image}
           alt=""
         />
+        {visible ? (
+          <div
+            onClick={() => {}}
+            className="absolute w-full h-full bg-black bg-opacity-35 flex items-center justify-center text-white z-10"
+          >
+            <FaPencilAlt size={35} />
+          </div>
+        ) : null}
       </div>
       <div className="mt-4 text-gray-400 text-2xl text-center group-hover:text-white">
         {name}
@@ -44,9 +55,18 @@ const UserCard: React.FC<UserCardProps> = ({ name, image, id }) => {
 };
 const Profile = () => {
   const [name, setName] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { data: currentUser } = userCurrentUser();
 
+  const [isVisible, setisVisible] = useState(false);
+
+  const toggleVisible = () => {
+    setisVisible((prev) => !prev);
+  };
+
+  const resetback = () => {
+    toggleVisible();
+  };
 
   const isProfile = useMemo(() => {
     if (!currentUser) {
@@ -99,24 +119,38 @@ const Profile = () => {
   useEffect(() => {
     if (!loading) {
       makeProfile();
-
     }
   }, [isProfile]);
 
   return (
-    <div className="flex items-center h-full justify-center">
-      <div className="flex flex-col">
-        <h1 className="text-3xl md:text-4xl text-white text-center">
+    <div className="flex h-full justify-center w-full items-center">
+      <div className="flex flex-col w-full">
+        <h1 className="lg:text-[3rem] md:text-4xl text-white text-center">
           Who&#39;s watching?
         </h1>
         <div className="flex items-center justify-center gap-8 mt-10">
           <div onClick={() => {}}>
             {profiles &&
               profiles.User.map((i: any) => (
-                <UserCard key={i.id} id={i.id} name={i.name} image={i.imageUrl} />
+                <UserCard
+                  key={i.id}
+                  id={i.id}
+                  name={i.name}
+                  image={i.imageUrl}
+                  visible={isVisible}
+                />
               ))}
           </div>
         </div>
+        {isVisible ? (
+          <button className="w-max px-6 py-1 bg-white hover:bg-[#e50914] hover:text-white font-semibold text-[1.25rem] flex mt-16 items-center justify-center mx-auto" onClick={resetback}>
+            Done
+          </button>
+        ) : (
+          <div className="flex justify-center mt-16 " onClick={toggleVisible}>
+            <Profilebuttons text="Manage Profiles" />
+          </div>
+        )}
       </div>
     </div>
   );
