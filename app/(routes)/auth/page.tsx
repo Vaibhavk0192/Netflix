@@ -53,7 +53,7 @@ const Auth = () => {
           <img src="/images/logo.png" alt="logo" className="h-12" />
         </nav>
         <div className="flex justify-center">
-          <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
+          <div className="bg-black bg-opacity-70 px-16 py-16 self-center  lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {variant === "login" ? "Sign In" : "Sign Up"}
             </h2>
@@ -101,7 +101,7 @@ const Auth = () => {
                 <FaGithub size={30} />
               </div>
             </div>
-            <p className="text-neutral-500 mt-12">
+            <p className="text-neutral-500 mt-10">
               {variant === "login"
                 ? "New to Netflix?"
                 : "Already have an Account?"}

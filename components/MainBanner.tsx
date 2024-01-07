@@ -2,6 +2,7 @@
 import GetStarted from "@/components/GetStarted";
 import InputEmail from "@/components/inputEmail";
 import React from "react";
+import {useRouter} from "next/navigation"
 
 interface MainBannerProps {
   email: string;
@@ -9,13 +10,16 @@ interface MainBannerProps {
 }
 
 const MainBanner: React.FC<MainBannerProps> = ({ email, handleEmail }) => {
+  const router=useRouter()
   return (
     <div className="">
       <div className="relative h-[100vh] w-full bg-[url('/images/banner.jpg')] bg-no-repeat bg-fixed bg-cover ">
         <div className=" w-full h-full bg-opacity-70 bg-black ">
           <nav className="flex justify-between lg:px-44 w-full  lg:py-6 sm: px-4  sm: py-4">
             <img src="/images/logo.png" alt="logo" className=" h-10  " />
-            <button className="bg-[#e50914] w-20 h-8 rounded text-white text-sm font-bold mt-1 mr-4">
+            <button className="bg-[#e50914] w-20 h-8 rounded text-white text-sm font-bold mt-1 mr-4" onClick={()=>{
+              router.push("/auth")
+            }}>
               Sign In
             </button>
           </nav>
