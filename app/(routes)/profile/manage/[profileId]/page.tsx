@@ -2,27 +2,81 @@
 import Headings from "@/components/Profile manage page/heading";
 import AutoPlayText from "@/components/Profile manage page/Autoplayinput";
 import Profilebuttons from "@/components/Profile manage page/profileButtons";
-import DeletePage from "@/components/Profile manage page/DeletePage"
-import React, { useState } from "react";
+import DeletePage from "@/components/Profile manage page/DeletePage";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import useCurrentProfile from "@/hooks/useCurrentProfile";
+import useProfiles from "@/hooks/useProfiles";
 
 const Manage = () => {
+  const router = useRouter();
   const [isDelete, setisDelete] = useState(false);
+
+  const params = useParams<{ profileId: string }>();
+  const profileId = params.profileId;
+
+  const { data: profile, mutate } = useCurrentProfile(profileId);
+  const { data: profiles, mutate: mutateProfile } = useProfiles();
+  const [name, setName] = useState("");
+  console.log(profiles?.User?.length);
+
+  useEffect(() => {
+    setName(profile?.name || "");
+  }, [profile]);
   const toggleDelete = () => {
+    if (profiles && profiles.User.length > 1) {
+      // setisDelete((prev) => !prev);
+    }
     setisDelete((prev) => !prev);
     console.log(isDelete);
   };
 
-  const resetback=()=>{
+  const handleSave = async () => {
+    if (profile.name !== name) {
+    }
+    try {
+      const response = await fetch("/api/nameChange", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          profile: profile.id,
+        }),
+      });
+      if (response) {
+        const res = await response.json();
+        console.log(res);
+      }
+      mutate({
+        ...profile,
+        name: name,
+      });
+      mutateProfile();
+    } catch (err) {
+      console.log(err);
+    }
+
+    router.back();
+  };
+
+  const resetback = () => {
     toggleDelete();
-  }
+  };
 
   if (isDelete) {
-    return <div>
-     <DeletePage func={resetback} />
-    </div>;
-  }
-  
-  else {
+    return (
+      <div>
+        <DeletePage
+          func={resetback}
+          name={profile.name}
+          image={profile.imageUrl}
+          profile={profile.id}
+        />
+      </div>
+    );
+  } else {
     return (
       <div>
         <div className="w-full h-auto overflow-x-hidden overflow-y-auto mt-[4rem]">
@@ -35,13 +89,17 @@ const Manage = () => {
             </div>
             <div className="flex mt-6">
               <img
-                src="/images/default-green.png"
+                src={profile && profile.imageUrl}
                 className=" h-32 object-contain"
               />
               <div className=" ml-6 flex flex-col ">
                 <input
                   placeholder="Name"
                   className="bg-[#666666] px-2 py-2 text-white outline-none font-normal text-lg placeholder:text-[#CCCCCC] placeholder:pl-2"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
                 />
                 <Headings heading="Languages" />
                 <div className="mt-1">
@@ -50,9 +108,7 @@ const Manage = () => {
                     id="language"
                     className="outline-none px-3 py-1 bg-black text-white border text-sm border-white hover:bg-[rgb(45,45,45)]"
                   >
-                    <option selected value="English">
-                      English
-                    </option>
+                    <option defaultValue="English">English</option>
                     <option value="Hindi">Hindi</option>
                     <option value="Spanish">Spanish</option>
                     <option value="Italian">Italian</option>
@@ -61,8 +117,8 @@ const Manage = () => {
                 </div>
                 <Headings heading="Game Handle" />
                 <span className="text-white mt-4 text-sm font-normal">
-                  Your handle is a unique name that will be used for playing with
-                  other Netflix members across all Netflix games.
+                  Your handle is a unique name that will be used for playing
+                  with other Netflix members across all Netflix games.
                 </span>
                 <input
                   placeholder="Create Game Handle"
@@ -87,7 +143,10 @@ const Manage = () => {
             </div>
             <hr className="border-1 h-px bg-[#232323] mt-8 border-transparent" />
             <div className="flex mt-8 items-center gap-4 mb-10">
-              <button className="w-max px-6 py-1 bg-white hover:bg-[#e50914] hover:text-white font-semibold text-[1.25rem]">
+              <button
+                className="w-max px-6 py-1 bg-white hover:bg-[#e50914] hover:text-white font-semibold text-[1.25rem]"
+                onClick={handleSave}
+              >
                 Save
               </button>
               <div>

@@ -1,8 +1,6 @@
 "use client";
 import userCurrentUser from "@/hooks/useCurrentuser";
 import useProfiles from "@/hooks/useProfiles";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import Profilebuttons from "@/components/Profile manage page/profileButtons";
@@ -20,7 +18,7 @@ interface UserCardProps {
   name: string;
   image: string;
   id: string;
-  visible: string;
+  visible: boolean;
 }
 
 const UserCard: React.FC<UserCardProps> = ({ name, image, id, visible }) => {
@@ -29,7 +27,9 @@ const UserCard: React.FC<UserCardProps> = ({ name, image, id, visible }) => {
     <div
       className="group flex-row w-40 mx-auto"
       onClick={() => {
-        router.push(`/in/${id}`);
+        !visible
+          ? router.push(`/in/${id}`)
+          : router.push(`/profile/manage/${id}`);
       }}
     >
       <div className="relative w-25 h-25 rounded-md flex items-center justify-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden">
@@ -76,16 +76,19 @@ const Profile = () => {
       return;
     }
     const list = currentUser.currentUser.profile;
+    if (list.length == 0) {
+      setLoading(false);
+    }
     return list;
   }, [currentUser]);
 
-  const { data: profiles } = useProfiles();
+  const { data: profiles, mutate } = useProfiles();
 
   const makeProfile = async () => {
+    console.log(isProfile);
     if (isProfile === undefined) {
       return;
     }
-
     const username = currentUser.currentUser.name;
     setName(username);
     const image = images[0];
@@ -93,11 +96,9 @@ const Profile = () => {
     if (!name && !image) {
       return;
     }
-
     if (isProfile.length === 0) {
       try {
         setLoading(true);
-
         const createProfileResponse = await fetch("/api/createProfile", {
           method: "POST",
           headers: {
@@ -113,6 +114,7 @@ const Profile = () => {
           const data = await createProfileResponse.json();
           console.log("Profile created successfully:", data);
         }
+        mutate();
       } catch (error) {
         console.error("Error creating profile:", error);
       }
@@ -123,7 +125,7 @@ const Profile = () => {
     if (!loading) {
       makeProfile();
     }
-  }, [isProfile]);
+  }, [isProfile, currentUser]);
 
   const [isPlus,setisPlus]=useState(true)
    if(profiles && profiles.User.length>3){
