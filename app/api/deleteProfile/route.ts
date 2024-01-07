@@ -9,7 +9,7 @@ export async function DELETE(req: NextRequest) {
   try {
     if (req.method === "DELETE") {
       const { currentUser } = await serverAuth();
-      const { profileId } = await req.json();
+      const { profileId } = await req.json();   
       const user = await prismadb.profiles.delete({
         where: {
           id: profileId,

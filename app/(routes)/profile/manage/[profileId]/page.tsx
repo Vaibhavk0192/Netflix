@@ -149,7 +149,11 @@ const Manage = () => {
               >
                 Save
               </button>
-              <div>
+              <div
+                onClick={() => {
+                  router.back();
+                }}
+              >
                 <Profilebuttons text="Cancel" />
               </div>
               <div onClick={toggleDelete}>
