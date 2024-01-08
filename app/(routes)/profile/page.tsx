@@ -61,7 +61,6 @@ const Profile = () => {
   const { data: currentUser } = userCurrentUser();
 
   const [isVisible, setisVisible] = useState(false);
-  
 
   const toggleVisible = () => {
     setisVisible((prev) => !prev);
@@ -76,7 +75,7 @@ const Profile = () => {
       return;
     }
     const list = currentUser.currentUser.profile;
-    if (list &&list.length == 0) {
+    if (list && list.length == 0) {
       setLoading(false);
     }
     return list || [];
@@ -127,56 +126,61 @@ const Profile = () => {
     }
   }, [isProfile, currentUser]);
 
-  const [isPlus,setisPlus]=useState(true)
-   if(profiles && profiles.User.length>=4){
-    setisPlus(false)
-   }
-    return (
-      <div className="flex h-full justify-center w-full items-center">
-        <div className="flex flex-col w-full">
-          <h1 className="lg:text-[3rem] md:text-[2.75rem] sm:text-[2.5rem] text-white text-center">
-            Who&#39;s watching?
-          </h1>
-          <div className="flex items-center justify-center gap-8 mt-10 flex-wrap">
-            <div onClick={() => {}}>
-              {profiles &&
-                profiles.User.map((i: any) => (
-                  <UserCard
-                    key={i.id}
-                    id={i.id}
-                    name={i.name}
-                    image={i.imageUrl}
-                    visible={isVisible}
-                  />
-                ))}
-            </div>
-            {(!isVisible && isPlus)? (
-              <div className="flex flex-col group md:w-28 lg:w-40 justify-center items-center" onClick={()=>{router.push("/profile/create")}}>
-                <div className="md:w-28 lg:w-40 lg:h-40 md:h-28 flex items-center justify-center border-2 border-transparent  overflow-hidden rounded-md hover:bg-white group-hover:cursor-pointer  group-hover:border-white group-hover:text-white">
-                  <BiSolidPlusCircle className="text-gray-400 " size={100} />
-                </div>
-                <span className="mt-4 text-gray-400 lg:text-2xl text-center group-hover:text-white sm:text-xl">
-                  Add Profile
-                </span>
-              </div>
-            ) : null}
+  const [isPlus, setisPlus] = useState(true);
+  if (profiles && profiles.User.length >= 4) {
+    setisPlus(false);
+  }
+  return (
+    <div className="flex h-full justify-center w-full items-center">
+      <div className="flex flex-col w-full">
+        <h1 className="lg:text-[3rem] md:text-[2.75rem] sm:text-[2.5rem] text-white text-center">
+          Who&#39;s watching?
+        </h1>
+        <div className="flex flex-row items-center justify-center gap-8 mt-10 flex-wrap">
+          <div onClick={() => {}} className="flex gap-4 flex-wrap">
+            {profiles &&
+              profiles.User.map((i: any) => (
+                <UserCard
+                  key={i.id}
+                  id={i.id}
+                  name={i.name}
+                  image={i.imageUrl}
+                  visible={isVisible}
+                />
+              ))}
           </div>
-
-          {isVisible ? (
-            <button
-              className="w-max px-6 py-1 bg-white hover:bg-[#e50914] hover:text-white font-semibold text-[1.25rem] flex mt-16 items-center justify-center mx-auto"
-              onClick={resetback}
+          {!isVisible && isPlus ? (
+            <div
+              className="flex flex-col group md:w-28 lg:w-40 justify-center items-center"
+              onClick={() => {
+                router.push("/profile/create");
+              }}
             >
-              Done
-            </button>
-          ) : (
-            <div className="flex justify-center mt-16 " onClick={toggleVisible}>
-              <Profilebuttons text="Manage Profiles" />
+              <div className="md:w-28 lg:w-40 lg:h-40 md:h-28 flex items-center justify-center border-2 border-transparent  overflow-hidden rounded-md hover:bg-white group-hover:cursor-pointer  group-hover:border-white group-hover:text-white">
+                <BiSolidPlusCircle className="text-gray-400 " size={100} />
+              </div>
+              <span className="mt-4 text-gray-400 lg:text-2xl text-center group-hover:text-white sm:text-xl">
+                Add Profile
+              </span>
             </div>
-          )}
+          ) : null}
         </div>
+
+        {isVisible ? (
+          <button
+            className="w-max px-6 py-1 bg-white hover:bg-[#e50914] hover:text-white font-semibold text-[1.25rem] flex mt-16 items-center justify-center mx-auto"
+            onClick={resetback}
+          >
+            Done
+          </button>
+        ) : (
+          <div className="flex justify-center mt-16 " onClick={toggleVisible}>
+            <Profilebuttons text="Manage Profiles" />
+          </div>
+        )}
       </div>
-    );
+    </div>
+  );
 };
 
 export default Profile;

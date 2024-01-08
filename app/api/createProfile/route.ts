@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 import serverAuth from "@/lib/serverAuth";
+import { concat } from "lodash";
 
 export async function POST(req: Request) {
   try {
@@ -11,10 +12,6 @@ export async function POST(req: Request) {
       const { imageUrl, name } = await req.json();
       console.log(currentUser.profile);
 
-      if (currentUser.profile.length > 0) {
-        throw new Error("profile already exists");
-      }
-      
       const profileData = await prismadb.profiles.create({
         data: {
           name: name,
@@ -23,14 +20,15 @@ export async function POST(req: Request) {
         },
       });
       console.log(profileData);
-      let profileList = [profileData.id];
+
+      let profileList = concat(currentUser.profile, profileData.id);
       const userUpdated = await prismadb.user.update({
         where: {
           email: currentUser.email || "",
         },
         data: {
           profile: {
-            push: profileList,
+            set: profileList,
           },
         },
       });
