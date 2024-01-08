@@ -6,7 +6,7 @@ const CreateProfile = () => {
   const router = useRouter();
   return (
     <div className="w-full h-full overflow-hidden">
-      <div className="flex flex-col m-auto mt-36 w-[40%]">
+      <div className="flex flex-col m-auto mt-36 lg:w-[40%] sm:w-[60%] md:w-[70%] flex-wrap min-[320px]:w-[90%] min-[900px]:w-[60%]">
         <div className="text-white text-[3.5rem] font-normal ">Add Profile</div>
         <div className="text-[1.25rem] text-[#666666] mt-2">
           Add a profile for another person watching Netflix
@@ -15,8 +15,9 @@ const CreateProfile = () => {
         <div className="flex items-center mt-4 py-2 gap-6">
           <img
             src="/images/default-green.png"
-            className="w-32 h-32 rounded-md"
+            className="lg:w-32 lg:h-32 rounded-md min-[320px]:w-20"
           />
+
           <input
             placeholder="Name"
             className="bg-[#666666] px-2 py-2 text-white outline-none font-normal text-lg placeholder:text-[#CCCCCC]  w-full"

@@ -13,10 +13,10 @@ const Feature: React.FC<FreatureProps> = ({ image, text1, text2 }) => {
         <div className="flex-wrap-reverse md:flex-wrap-reverse flex items-center justify-between w-full  lg:mx-32 sm:flex-wrap sm:px-1 ">
           <img
             src={image}
-            className="h-[24rem] w-[36rem] self-center box-border flex lg:justify-center md:justify-center items-center basis-1/2 sm:h-2/3 lg:mb-0 sm:mb-5"
+            className="h-[24rem] w-[36rem] self-center box-border flex lg:justify-center sm:justify-center items-center basis-1/2 sm:h-2/3 lg:mb-0 sm:mb-5 flex-wrap"
           ></img>
 
-          <div className="gap-4 lg:w-[34rem] box-border self-center flex flex-col h-auto sm: w-full text-white">
+          <div className="gap-4 lg:w-[34rem] box-border self-center flex flex-col h-auto sm: w-full text-white flex-wrap">
             <span className="lg:text-[2.85rem] font-black lg:text-left mb-4 sm:text-3xl sm:text-center">
               {text1}
             </span>

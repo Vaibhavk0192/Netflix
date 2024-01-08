@@ -21,7 +21,7 @@ const BillBoard = () => {
   }, [openModal, data && data[0]?.id]);
 
   return (
-    <div className="relative h-[95%] mb-5">
+    <div className="relative lg:h-[95%] mb-5 sm:h-[70%]">
       <video
         poster={!isLoading ? data[0]?.thumbnailUrl : ""}
         className="w-full h-full object-cover brightness-[60%] transition duration-500 "
@@ -30,11 +30,11 @@ const BillBoard = () => {
         loop
         src={!isLoading ? data[0]?.videoUrl : ""}
       ></video>
-      <div className="absolute top-[50%] w-full h-[30%] pl-16">
-        <p className="text-white text-7xl h-[45%] font-bold drop-shadow-xl">
+      <div className="absolute lg:top-[50%] sm:top-[40%] w-full h-[30%] pl-16 max-sm:top-[40%] ">
+        <p className="text-white lg:text-7xl sm:text-5xl h-[45%] font-bold drop-shadow-xl max-sm:text-[5xl]">
           {!isLoading ? data[0]?.title : ""}
         </p>
-        <p className="text-white text-[8px] md:text-lg mt-6 w-[90%] md:w-[80%] lg:w-[50%] drop-shadow-xl">
+        <p className="text-white text-[10px] md:text-[15px] lg:mt-6 w-[80%] md:w-[80%] lg:w-[50%] drop-shadow-xl sm:mt-4">
           {!isLoading ? data[0]?.description : ""}
         </p>
         <div className="flex flex-row items-center mt-6 justify-between">

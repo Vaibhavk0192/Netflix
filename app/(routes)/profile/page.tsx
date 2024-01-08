@@ -25,7 +25,7 @@ const UserCard: React.FC<UserCardProps> = ({ name, image, id, visible }) => {
   const router = useRouter();
   return (
     <div
-      className="group flex-row w-40 mx-auto"
+      className="group flex-row lg:w-40 mx-auto min-[320px]:w-28"
       onClick={() => {
         !visible
           ? router.push(`/in/${id}`)
@@ -48,7 +48,7 @@ const UserCard: React.FC<UserCardProps> = ({ name, image, id, visible }) => {
           </div>
         ) : null}
       </div>
-      <div className="mt-4 text-gray-400 text-2xl text-center group-hover:text-white">
+      <div className="mt-4 text-gray-400 lg:text-2xl text-center group-hover:text-white sm:text-xl">
         {name}
       </div>
     </div>
@@ -76,10 +76,10 @@ const Profile = () => {
       return;
     }
     const list = currentUser.currentUser.profile;
-    if (list.length == 0) {
+    if (list &&list.length == 0) {
       setLoading(false);
     }
-    return list;
+    return list || [];
   }, [currentUser]);
 
   const { data: profiles, mutate } = useProfiles();
@@ -134,10 +134,10 @@ const Profile = () => {
     return (
       <div className="flex h-full justify-center w-full items-center">
         <div className="flex flex-col w-full">
-          <h1 className="lg:text-[3rem] md:text-4xl text-white text-center">
+          <h1 className="lg:text-[3rem] md:text-[2.75rem] sm:text-[2.5rem] text-white text-center">
             Who&#39;s watching?
           </h1>
-          <div className="flex items-center justify-center gap-8 mt-10">
+          <div className="flex items-center justify-center gap-8 mt-10 flex-wrap">
             <div onClick={() => {}}>
               {profiles &&
                 profiles.User.map((i: any) => (
@@ -151,11 +151,11 @@ const Profile = () => {
                 ))}
             </div>
             {(!isVisible && isPlus)? (
-              <div className="flex flex-col group" onClick={()=>{router.push("/profile/create")}}>
-                <div className="w-40 h-40 flex items-center justify-center border-2 border-transparent  overflow-hidden rounded-md hover:bg-white group-hover:cursor-pointer  group-hover:border-white group-hover:text-white">
+              <div className="flex flex-col group md:w-28 lg:w-40 justify-center items-center" onClick={()=>{router.push("/profile/create")}}>
+                <div className="md:w-28 lg:w-40 lg:h-40 md:h-28 flex items-center justify-center border-2 border-transparent  overflow-hidden rounded-md hover:bg-white group-hover:cursor-pointer  group-hover:border-white group-hover:text-white">
                   <BiSolidPlusCircle className="text-gray-400 " size={100} />
                 </div>
-                <span className="mt-4 text-gray-400 text-2xl text-center group-hover:text-white">
+                <span className="mt-4 text-gray-400 lg:text-2xl text-center group-hover:text-white sm:text-xl">
                   Add Profile
                 </span>
               </div>

@@ -36,9 +36,9 @@ const DeletePage: React.FC<DeleteProps> = ({ func, name, image, profile }) => {
   };
   return (
     <div className="w-full h-full overflow-hidden">
-      <div className="flex flex-col m-auto mt-36 w-[35%]">
+      <div className="flex flex-col m-auto mt-36 lg:w-[40%] md:w-[70%] sm:w-[70%] min-[440px]:w-[80%]">
         <div
-          className="text-white text-[3.5rem] font-normal border-b "
+          className="text-white sm:text-[3.5rem] font-normal border-b max-sm:text-[2.5rem]"
           style={{ borderBottomColor: "#232323" }}
         >
           Delete Profile?
@@ -59,7 +59,7 @@ const DeletePage: React.FC<DeleteProps> = ({ func, name, image, profile }) => {
         <div className="flex gap-4 mt-8">
           <button
             onClick={func}
-            className="w-max px-6 py-1 bg-white hover:bg-[#e50914] hover:text-white font-semibold text-[1.25rem]"
+            className="w-max px-6 py-1 bg-white hover:bg-[#e50914] hover:text-white font-semibold sm:text-[1.25rem] max-sm:text-[1rem] "
           >
             Keep Profile
           </button>
