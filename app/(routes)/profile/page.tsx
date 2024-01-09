@@ -2,7 +2,7 @@
 import userCurrentUser from "@/hooks/useCurrentuser";
 import useProfiles from "@/hooks/useProfiles";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Profilebuttons from "@/components/Profile manage page/profileButtons";
 import { FaPencilAlt } from "react-icons/fa";
 import { BiSolidPlusCircle } from "react-icons/bi";
@@ -59,6 +59,7 @@ const Profile = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
   const { data: currentUser } = userCurrentUser();
+  const [isPlus, setisPlus] = useState(true);
 
   const [isVisible, setisVisible] = useState(false);
 
@@ -82,6 +83,10 @@ const Profile = () => {
   }, [currentUser]);
 
   const { data: profiles, mutate } = useProfiles();
+  useEffect(() => {
+    const user = currentUser?.currentUser?.name;
+    setName(user);
+  }, [currentUser]);
 
   const makeProfile = async () => {
     console.log(isProfile);
@@ -89,7 +94,6 @@ const Profile = () => {
       return;
     }
     const username = currentUser.currentUser.name;
-    setName(username);
     const image = images[0];
 
     if (!name && !image) {
@@ -124,12 +128,14 @@ const Profile = () => {
     if (!loading) {
       makeProfile();
     }
-  }, [isProfile, currentUser]);
+    if (profiles && profiles.User.length >= 4) {
+      setisPlus(false);
+    }
+    if (profiles && profiles.User.length < 4) {
+      setisPlus(true);
+    }
+  }, [isProfile, currentUser, isPlus, profiles]);
 
-  const [isPlus, setisPlus] = useState(true);
-  if (profiles && profiles.User.length >= 4) {
-    setisPlus(false);
-  }
   return (
     <div className="flex h-full justify-center w-full items-center">
       <div className="flex flex-col w-full">
@@ -138,16 +144,18 @@ const Profile = () => {
         </h1>
         <div className="flex flex-row items-center justify-center gap-8 mt-10 flex-wrap">
           <div onClick={() => {}} className="flex gap-4 flex-wrap">
-            {profiles &&
-              profiles.User.map((i: any) => (
-                <UserCard
-                  key={i.id}
-                  id={i.id}
-                  name={i.name}
-                  image={i.imageUrl}
-                  visible={isVisible}
-                />
-              ))}
+            <Suspense fallback={<p>Loading</p>}>
+              {profiles &&
+                profiles.User.map((i: any) => (
+                  <UserCard
+                    key={i.id}
+                    id={i.id}
+                    name={i.name}
+                    image={i.imageUrl}
+                    visible={isVisible}
+                  />
+                ))}
+            </Suspense>
           </div>
           {!isVisible && isPlus ? (
             <div
