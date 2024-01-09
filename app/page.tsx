@@ -39,7 +39,7 @@ const Landing = () => {
         image="/images/feature4.png"
       />
       <FrequentQues />
-      <div className="bg-[#000000] pb-10 flex flex-row flex-wrap justify-center items-center gap-2">
+      <div className="bg-[#000000] pb-10 flex flex-row flex-wrap justify-center items-center gap-2 pt-6">
         <InputEmail
           label="Email address"
           onChange={handleSetEmail}

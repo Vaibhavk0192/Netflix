@@ -25,7 +25,7 @@ const Questions: React.FC<QuestionProps> = ({
         className="p-0 m-0 text-lg w-full mt-2 h-[5.30rem] mb-[0.125rem] cursor-pointer"
         onClick={toggleVisibility}
       >
-        <div className="bg-[rgb(45,45,45)] text-white text-[1.425rem] mb-2 h-full flex items-center px-6 hover:bg-[#414141] justify-between">
+        <div className="bg-[rgb(45,45,45)] text-white sm:text-[1.425rem] max-sm:text-[1.1rem] mb-2 h-full flex items-center sm:px-6 max-sm:px-2 hover:bg-[#414141] justify-between">
           <span>{quess}</span>
           {isVisible ? (
             <RxCross1 size={37} className="transition delay-100" />
@@ -35,12 +35,12 @@ const Questions: React.FC<QuestionProps> = ({
         </div>
       </div>
       {isVisible && (
-        <div className="m-0 text-lg w-full bg-[rgb(45,45,45)] px-6 py-10 delay-100">
-          <span className="text-white text-[1.425rem] flex items-center ">
+        <div className="m-0 text-lg w-full bg-[rgb(45,45,45)] sm:px-6 max-sm:px-2 py-10 delay-100">
+          <span className="text-white sm:text-[1.425rem] max-sm:text-[0.8rem]  flex items-center ">
             {anss}
           </span>
           <br />
-          <span className="text-white text-[1.425rem] flex items-center ">
+          <span className="text-white sm:text-[1.425rem] max-sm:text-[0.8rem]  flex items-center ">
             {anss1}
           </span>
         </div>

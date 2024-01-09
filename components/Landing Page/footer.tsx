@@ -1,3 +1,5 @@
+import FooterText from "./footer_text"
+
 const FooterHome = () => {
   return (
     <footer className="block m-auto text-base font-normal mt-2 mb-8  md:pl-8 md:pr-8 md:mt-18 md:mb-18 text-white text-opacity-70 bg-black ">
@@ -16,53 +18,24 @@ const FooterHome = () => {
           <div className="box-border inline-flex flex-wrap w-inherit p-0 flex-shrink-0 flex-grow-0 w-full">
             <div className="my-3 w-full text-sm font-normal block box-border">
               <div className="wrapper w-full inherit h-auto">
-                <ul className="inline-flex h-inherit w-full flex-wrap flex-row  ">
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer ">
-                    <span className=" hover:text-gray-500" >FAQ</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Help Center</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Account</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Media Centre</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Invester Relations</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Jobs</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Ways to Watch</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Terms of Use</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Privacy</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Cookie Preferences</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Corporate Information</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Contact Us</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Speed Test</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Legal Notices</span>
-                  </li>
-                  <li className="inline-flex flex-wrap w-inherit p-0  mt-4 lg:basis-1/4 underline md:basis-1/3 sm:basis-1/2 cursor-pointer">
-                    <span className=" hover:text-gray-500">Only on Netflix</span>
-                  </li>
-                </ul>
+                <div className="inline-flex h-inherit w-full flex-wrap flex-row  ">
+                  <FooterText text="FAQ"/>
+                  <FooterText text="Help Center"/>
+                  <FooterText text="Account"/>
+                  <FooterText text="Media Centre"/>
+                  <FooterText text="Invester Relations"/>
+                  <FooterText text="Jobs"/>
+                  <FooterText text="Ways to Watch"/>
+                  <FooterText text="Terms of Use"/>
+                  <FooterText text="Privacy"/>
+                  <FooterText text="Cookie Preferences"/>
+                  <FooterText text="Contact Us"/>
+                  <FooterText text="Corporate Information"/>
+                  <FooterText text="Speed Test"/>
+                  <FooterText text="Legal Notices"/>
+                  <FooterText text="Only on Netflix"/>
+                  
+                </div>
               </div>
             </div>
           </div>

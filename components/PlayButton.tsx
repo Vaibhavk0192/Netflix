@@ -11,7 +11,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({movieId}) => {
     <button
       onClick={() => router.push(`/watch/${movieId}`)}
       className=" bg-white 
-     px-2 md:px-4
+     lg:px-2 md:px-4 sm:px-1 max-sm:px-1 lg:py-1
     rounded-md 
     text-xs lg:text-lg 
     font-semibold
@@ -23,7 +23,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({movieId}) => {
     transition
     "
     >
-      <BsFillPlayFill className="mr-0.5 ml-2" size={45} />
+      <BsFillPlayFill className="mr-0.5 ml-2" size={30} />
       <span className="mr-5 ">Play</span>
     </button>
   );
