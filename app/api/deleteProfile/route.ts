@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 import serverAuth from "@/lib/serverAuth";
-import { without } from "lodash";
+import { without,add } from "lodash";
 
 export async function DELETE(req: NextRequest) {
   try {
@@ -16,6 +16,7 @@ export async function DELETE(req: NextRequest) {
         },
       });
 
+      
       const updatedProfile = without(currentUser.profile, profileId);
 
       const res = await prismadb.user.update({
