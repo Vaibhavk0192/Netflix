@@ -21,7 +21,7 @@ const BillBoard = () => {
   }, [openModal, data && data[0]?.id]);
 
   return (
-    <div className="relative lg:h-[95%] mb-5 sm:h-[70%]">
+    <div className="relative lg:h-[95%] mb-5 sm:h-[50%]">
       <video
         poster={!isLoading ? data[0]?.thumbnailUrl : ""}
         className="w-full h-full object-cover brightness-[60%] transition duration-500 "
@@ -30,15 +30,15 @@ const BillBoard = () => {
         loop
         src={!isLoading ? data[0]?.videoUrl : ""}
       ></video>
-      <div className="absolute lg:top-[50%] sm:top-[40%] w-full h-[30%] pl-16 max-sm:top-[40%] ">
+      <div className="absolute lg:top-[50%] sm:top-[40%] w-full h-[30%] md:pl-16 max-md:pl-10 max-sm:top-[40%] ">
         <p className="text-white lg:text-7xl sm:text-5xl h-[45%] font-bold drop-shadow-xl max-sm:text-[5xl]">
           {!isLoading ? data[0]?.title : ""}
         </p>
         <p className="text-white text-[10px] md:text-[15px] lg:mt-6 w-[80%] md:w-[80%] lg:w-[50%] drop-shadow-xl sm:mt-4">
           {!isLoading ? data[0]?.description : ""}
         </p>
-        <div className="flex flex-row items-center mt-6 justify-between">
-          <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center md:mt-6 justify-between flex-shrink sm:mt-4">
+          <div className="flex flex-row items-center flex-shrink">
           <PlayButton movieId={data && data[0]?.id} />
           <button
             onClick={handleOpenModel}
@@ -46,22 +46,23 @@ const BillBoard = () => {
             bg-white
             text-white
               bg-opacity-30 rounded-md 
-              py-1 md:py-2 
-              px-2 md:px-4
+              lg:py-1 md:py-2 max-sm:py-0.5 sm:py-0.5
+              lg:px-2 md:px-4 max-sm:px-0 sm:px-1
               w-auto 
-              text-xs lg:text-lg 
+              md:text-xs lg:text-lg max-sm:text-[0.525rem]
               font-semibold
               flex
               flex-row
               items-center
-              justify-center
+              justify-around
               hover:bg-opacity-20
               transition
-              ml-3 "
+              ml-3
+              mr-1 "
           >
             <AiOutlineInfoCircle
               className="w-4 md:w-7 mr-2 font-bold"
-              size={30}
+              size={25}
             />
             More Info
           </button>

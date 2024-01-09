@@ -79,7 +79,7 @@ const Manage = () => {
   } else {
     return (
       <div>
-        <div className="w-full h-auto overflow-x-hidden overflow-y-auto mt-[4rem] flex flex-wrap">
+        <div className="w-full h-auto overflow-x-hidden overflow-y-auto mt-[4rem] flex flex-wrap self-center">
           <div className=" lg:w-[43%] lg:m-auto sm:m-auto flex flex-col flex-wrap md:w-[60%] sm:w-[60%] min-[320px]:w-[50%]">
             <div
               className="text-white text-[3.5rem] font-normal border-b "

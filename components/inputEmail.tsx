@@ -23,12 +23,16 @@ const InputEmail: React.FC<InputProps> = ({
         className="
     flex 
     rounded-md
-    lg:px-6
-    lg:py-6
-    lg:pb-1
-    lg:mb-0
-    lg:w-96
-    text-md md:py-6
+    sm:px-6
+    sm:py-6
+    sm:mb-0
+    sm:w-96
+
+    max-sm:px-6
+    max-sm:py-2
+     
+
+    text-md
     text-white
     bg-black
     bg-opacity-50
@@ -37,16 +41,17 @@ const InputEmail: React.FC<InputProps> = ({
     focus:outline-white focus:outline-1
     focus:ring-0
     peer
-    sm: px-5 py-7 text-md pb-3 w-full h-12 text-[1rem]
+   text-md w-full sm:h-12 max-sm:h-8 text-[1rem]
     "
         placeholder=" "
       />
       <label
-        className=" absolute text-md text-zinc-400 duration-150
+        className=" absolute sm:text-md max-sm:text-xs text-zinc-400 duration-150
       transform
-      -translate-y-3
+      sm:-translate-y-3
       scale-75
-      top-4
+      sm:top-4
+      max-sm:top-3
       z-10
       origin-[0]
       left-6
