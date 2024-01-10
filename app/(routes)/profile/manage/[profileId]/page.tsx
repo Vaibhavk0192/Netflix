@@ -80,9 +80,9 @@ const Manage = () => {
     return (
       <div>
         <div className="w-full h-auto overflow-x-hidden overflow-y-auto mt-[4rem] flex flex-wrap self-center">
-          <div className=" lg:w-[43%] lg:m-auto sm:m-auto flex flex-col flex-wrap md:w-[60%] sm:w-[60%] min-[320px]:w-[50%]">
+          <div className="relative lg:w-[43%] lg:m-auto sm:m-auto flex flex-col flex-wrap  sm:w-[70%] max:sm:w-full max-sm:px-8">
             <div
-              className="text-white text-[3.5rem] font-normal border-b "
+              className="text-white sm:text-[3.5rem] max-sm:text-[2rem] font-normal border-b "
               style={{ borderBottomColor: "#232323" }}
             >
               Edit Profile
@@ -136,7 +136,8 @@ const Manage = () => {
                 </span>
                 <Profilebuttons text="Edit" />
                 <hr className="border-1 h-px bg-[#232323] mt-8 border-transparent" />
-                <Headings heading="Autoplay controls" />
+                <Headings heading="Autoplay controls"/>
+                <br/>
                 <AutoPlayText text="Autoplay next episodes in series for all devices." />
                 <AutoPlayText text="Autoplay previews while browsing on all devices." />
               </div>

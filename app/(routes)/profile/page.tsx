@@ -25,7 +25,7 @@ const UserCard: React.FC<UserCardProps> = ({ name, image, id, visible }) => {
   const router = useRouter();
   return (
     <div
-      className="group flex-row lg:w-40 mx-auto min-[320px]:w-28"
+      className="group flex-row lg:w-40 mx-auto max-sm:w-40 sm:w-40"
       onClick={() => {
         !visible
           ? router.push(`/in/${id}`)
@@ -139,8 +139,8 @@ const Profile = () => {
   return (
     <div className="flex h-full justify-center w-full items-center">
       <div className="flex flex-col w-full">
-        <h1 className="lg:text-[3rem] md:text-[2.75rem] sm:text-[2.5rem] text-white text-center">
-          Who&#39;s watching?
+        <h1 className="lg:text-[3rem] sm:text-[2.75rem] max-sm:text-[2.5rem] text-white text-center">
+          {isVisible?"Manage Profiles:":"Who's watching?"}
         </h1>
         <div className="flex flex-row items-center justify-center gap-8 mt-10 flex-wrap">
           <div onClick={() => {}} className="flex gap-4 flex-wrap">

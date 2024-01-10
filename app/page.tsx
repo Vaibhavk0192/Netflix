@@ -2,6 +2,7 @@
 
 import GetStarted from "@/components/GetStarted";
 import Feature from "@/components/Landing Page/Feature4";
+import OppositeFeature from "../components/Landing Page/opossiteFeature"
 import FrequentQues from "@/components/Landing Page/FrequeuntQues";
 import FooterHome from "@/components/Landing Page/footer";
 import MainBanner from "@/components/MainBanner";
@@ -22,7 +23,7 @@ const Landing = () => {
         text2="Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more."
         image="/images/feature1.png"
       />
-      <Feature
+      <OppositeFeature
         text1="Download your shows to watch offline"
         text2="Save your favourites easily and always have something to watch."
         image="/images/feature2.jpg"
@@ -32,7 +33,7 @@ const Landing = () => {
         text2="Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV."
         image="/images/feature3.png"
       />
-      <Feature
+      <OppositeFeature
         text1="Create profiles for kids"
         text2="Send children on adventures with their favourite characters in a
               space made just for them—free with your membership."
