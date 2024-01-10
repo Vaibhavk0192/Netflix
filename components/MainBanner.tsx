@@ -34,7 +34,7 @@ const MainBanner: React.FC<MainBannerProps> = ({ email, handleEmail }) => {
               Ready to watch? Enter your email to create or restart your
               membership.
             </div>
-            <form className="flex flex-row flex-wrap justify-center items-center gap-1">
+            <form className="flex flex-row flex-wrap justify-center items-center gap-2 ">
               <InputEmail
                 label="Email address"
                 onChange={handleEmail}
@@ -42,7 +42,7 @@ const MainBanner: React.FC<MainBannerProps> = ({ email, handleEmail }) => {
                 type="email"
                 value={email}
               />
-              <GetStarted />
+              <GetStarted email={email}/>
             </form>
           </div>
         </div>
