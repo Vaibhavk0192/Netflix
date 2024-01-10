@@ -48,8 +48,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data,profile }) => {
               className="cursor-pointer sm:w-6 sm:h-6 lg:w-10 lg:h-10  border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300"
             >
               <FaThumbsUp
-                size={20}
-                className="text-white hover:text-neutral-300 "
+                className="text-white hover:text-neutral-300 size-auto"
               />
             </div>
             </div>
@@ -57,8 +56,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data,profile }) => {
             <div className=" cursor-pointer sm:w-6 sm:h-6 lg:w-10 lg:h-10 border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300">
               <BsChevronDown
                 onClick={() => openModal(data && data?.id)}
-                size={25}
-                className="text-white hover:text-neutral-300 "
+                className="text-white hover:text-neutral-300 size-auto"
               />
             </div>
           </div>
