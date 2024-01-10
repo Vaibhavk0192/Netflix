@@ -6,13 +6,18 @@ import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { IoIosWarning } from "react-icons/io";
+import { useSearchParams } from "next/navigation";
 
 const Auth = () => {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const searchParams = useSearchParams();
+  const emailPromProps = searchParams.get("email")?.toString();
+  const [email, setEmail] = useState(emailPromProps);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [variant, setVariant] = useState("login");
+  const [showError, setShowError] = useState("");
 
   const togglevariant = useCallback(() => {
     setVariant((currentvariant) =>
@@ -22,14 +27,21 @@ const Auth = () => {
 
   const login = useCallback(async () => {
     try {
-      await signIn("credentials", {
+      const res = await signIn("credentials", {
         email,
         password,
         callbackUrl: "/profile",
+        redirect: false,
       });
-      // router.push("/");
-    } catch (err) {
-      console.log(err);
+      if (res?.status == 200) {
+        router.replace("/profile");
+      } else if (res?.status == 401) {
+        console.log(res?.status);
+        setShowError(res?.error?.toString() || "");
+      } else {
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [email, password]);
 
@@ -57,6 +69,14 @@ const Auth = () => {
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {variant === "login" ? "Sign In" : "Sign Up"}
             </h2>
+            {showError&&
+              <div className="h-18 flex mb-4 text-sm bg-[#d89c30] w-full rounded px-4 py-4 items-center gap-4 ">
+                <IoIosWarning className="h-7 w-7" />
+                <p>
+                  <strong>{showError}.</strong> Please try again.
+                </p>
+              </div>
+            }
             <div className="flex flex-col gap-4">
               {variant === "register" && (
                 <Input
@@ -71,7 +91,7 @@ const Auth = () => {
                 onChange={(ev: any) => setEmail(ev.target.value)}
                 id="email"
                 type="email"
-                value={email}
+                value={(email && email) || ""}
               />
               <Input
                 label="Password"
@@ -89,13 +109,21 @@ const Auth = () => {
             </button>
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div
-                onClick={() => signIn("google", { callbackUrl: "http://localhost:3000/profile" })}
+                onClick={() =>
+                  signIn("google", {
+                    callbackUrl: "http://localhost:3000/profile",
+                  })
+                }
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-95 transition-shadow"
               >
                 <FcGoogle size={30} />
               </div>
               <div
-                onClick={() => signIn("github", { callbackUrl: "http://localhost:3000/profile" })}
+                onClick={() =>
+                  signIn("github", {
+                    callbackUrl: "http://localhost:3000/profile",
+                  })
+                }
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition-shadow"
               >
                 <FaGithub size={30} />

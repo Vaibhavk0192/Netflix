@@ -1,4 +1,4 @@
-  "use client";
+"use client";
 
 import GetStarted from "@/components/GetStarted";
 import Feature from "@/components/Landing Page/Feature4";
@@ -6,9 +6,11 @@ import FrequentQues from "@/components/Landing Page/FrequeuntQues";
 import FooterHome from "@/components/Landing Page/footer";
 import MainBanner from "@/components/MainBanner";
 import InputEmail from "@/components/inputEmail";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const Landing = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const handleSetEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -47,7 +49,13 @@ const Landing = () => {
           type="email"
           value={email}
         />
-        <GetStarted />
+        <div
+          onClick={() => {
+            router.push("/auth");
+          }}
+        >
+          <GetStarted email={email}/>
+        </div>
       </div>
       <FooterHome />
     </>
