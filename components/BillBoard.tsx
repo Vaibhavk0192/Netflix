@@ -39,7 +39,7 @@ const BillBoard = () => {
         </p>
         <div className="flex flex-row items-center md:mt-6 justify-between flex-shrink sm:mt-4">
           <div className="flex flex-row items-center flex-shrink">
-          <PlayButton movieId={data && data[0]?.id} />
+          <PlayButton  movieId={data && data[0]?.id} />
           <button
             onClick={handleOpenModel}
             className="
@@ -58,11 +58,11 @@ const BillBoard = () => {
               hover:bg-opacity-20
               transition
               ml-3
-              mr-1 "
+              mr-1 size-auto"
+              
           >
             <AiOutlineInfoCircle
-              className="w-4 md:w-7 mr-2 font-bold"
-              size={25}
+              className="w-4 md:w-7 mr-2 font-bold size-auto"
             />
             More Info
           </button>
