@@ -3,7 +3,14 @@ import Profilebuttons from "@/components/Profile manage page/profileButtons";
 import useProfiles from "@/hooks/useProfiles";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import {AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck } from "react-icons/ai";
+
+const images = [
+  "/images/default-red.png",
+  "/images/default-blue.png",
+  "/images/default-green.png",
+  "/images/default-slate.png",
+];
 
 const CreateProfile = () => {
   const router = useRouter();
@@ -11,11 +18,12 @@ const CreateProfile = () => {
   const [error, setError] = useState("invisible");
   const [clicked, setClicked] = useState(false);
   const { data: profiles, mutate } = useProfiles();
-  const [isClicked, setisClicked] = useState(false)
+  const [isClicked, setisClicked] = useState(false);
 
-    const toggleClick=()=>{
-        setisClicked((prev)=>!prev)
-    }
+  const toggleClick = () => {
+    setisClicked((prev) => !prev);
+  };
+  const imgLength = profiles?.User?.length;
 
   const handleCreate = async () => {
     setClicked(true);
@@ -24,7 +32,6 @@ const CreateProfile = () => {
     profiles.User.forEach((profile: any) => {
       profileName.push(profile.name);
     });
-    console.log(profileName);
     if (profileName.includes(name)) {
       setError("visible");
       setClicked(false);
@@ -42,7 +49,7 @@ const CreateProfile = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          imageUrl: "/images/default-green.png",
+          imageUrl: images[imgLength],
           name: name,
         }),
       });
@@ -67,7 +74,7 @@ const CreateProfile = () => {
         <hr className="border-1 h-px bg-[#232323] mt-4 border-transparent" />
         <div className="flex items-center mt-4 py-2 sm:gap-6 max-sm:gap-2">
           <img
-            src="/images/default-blue.png"
+            src={images[imgLength]}
             className="lg:w-32 lg:h-32 rounded-md max-sm:w-16 sm:w-24"
           />
           <div className="w-full h-full">
@@ -84,8 +91,17 @@ const CreateProfile = () => {
             </div>
           </div>
           <div className="flex items-center sm:gap-2 max-sm:gap-1">
-            <div className="sm:h-8 sm:w-8 max-sm:w-6 max-sm:h-6 border border-[#666666] flex justify-center items-center transition" onClick={toggleClick}>{isClicked?<AiOutlineCheck className="text-[#c0cccc] size-8"/>:null}</div>
-            <span className="text-white sm:text-[1.25rem]  max-sm:text-sm">Child?</span>
+            <div
+              className="sm:h-8 sm:w-8 max-sm:w-6 max-sm:h-6 border border-[#666666] flex justify-center items-center transition"
+              onClick={toggleClick}
+            >
+              {isClicked ? (
+                <AiOutlineCheck className="text-[#c0cccc] size-8" />
+              ) : null}
+            </div>
+            <span className="text-white sm:text-[1.25rem]  max-sm:text-sm">
+              Child?
+            </span>
           </div>
         </div>
         <hr className="border-1 h-px bg-[#232323] mt-6 border-transparent" />

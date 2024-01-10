@@ -8,10 +8,10 @@ import { FaPencilAlt } from "react-icons/fa";
 import { BiSolidPlusCircle } from "react-icons/bi";
 
 const images = [
-  "/images/default-blue.png",
   "/images/default-red.png",
-  "/images/default-slate.png",
+  "/images/default-blue.png",
   "/images/default-green.png",
+  "/images/default-slate.png",
 ];
 
 interface UserCardProps {
@@ -140,7 +140,7 @@ const Profile = () => {
     <div className="flex h-full justify-center w-full items-center">
       <div className="flex flex-col w-full">
         <h1 className="lg:text-[3rem] sm:text-[2.75rem] max-sm:text-[2.5rem] text-white text-center">
-          {isVisible?"Manage Profiles:":"Who's watching?"}
+          {isVisible ? "Manage Profiles:" : "Who's watching?"}
         </h1>
         <div className="flex flex-row items-center justify-center gap-8 mt-10 flex-wrap">
           <div onClick={() => {}} className="flex gap-4 flex-wrap">

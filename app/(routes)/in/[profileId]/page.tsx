@@ -8,11 +8,13 @@ import useMovieList from "@/hooks/useMovieList";
 import useFavourites from "@/hooks/useFavourites";
 import InfoModel from "@/components/InfoModel";
 import useInfoModal from "@/hooks/useInfoModal";
+import useProfiles from "@/hooks/useProfiles";
 
 export default function Home() {
   const { data: movies = [] } = useMovieList();
   const { isOpen, closeModal } = useInfoModal();
-  const { data: session, status } = useSession({
+  const { data: profiles } = useProfiles();
+  const { status } = useSession({
     required: true,
     onUnauthenticated() {
       redirect("/auth");
@@ -22,12 +24,12 @@ export default function Home() {
   const profileId = params.profileId;
   const { data: favourites } = useFavourites(profileId);
   if (status === "loading") {
-    return ;
+    return;
   }
   return (
     <>
       <InfoModel visible={isOpen} onClose={closeModal} />
-      <Navbar />
+      <Navbar profileData={profiles && profiles.User} profileId={profileId} />
       <BillBoard />
       <div className="pb-40">
         <MovieList title="Trending Now" data={movies} profile={profileId} />
