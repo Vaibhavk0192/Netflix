@@ -13,7 +13,8 @@ const PlayButton: React.FC<PlayButtonProps> = ({movieId}) => {
       className=" bg-white 
      lg:px-2 md:px-4 sm:px-1 max-sm:px-1 lg:py-1
     rounded-md 
-    text-xs lg:text-lg 
+    sm:text-sm lg:text-lg 
+    sm:py-0.5
     font-semibold
     flex
     flex-row
@@ -23,7 +24,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({movieId}) => {
     transition
     "
     >
-      <BsFillPlayFill className="mr-0.5 ml-2" size={30} />
+      <BsFillPlayFill className="mr-0.5 ml-2 lg:size-8 sm:size-8 max-sm:size-6"  />
       <span className="mr-5 ">Play</span>
     </button>
   );

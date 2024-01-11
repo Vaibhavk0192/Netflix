@@ -21,7 +21,7 @@ const BillBoard = () => {
   }, [openModal, data && data[0]?.id]);
 
   return (
-    <div className="relative lg:h-[95%] mb-5 sm:h-[50%]">
+    <div className="relative lg:h-[95%] mb-5 sm:h-[50%] max-sm:h-[40%]">
       <video
         poster={!isLoading ? data[0]?.thumbnailUrl : ""}
         className="w-full h-full object-cover brightness-[60%] transition duration-500 "
@@ -37,7 +37,7 @@ const BillBoard = () => {
         <p className="text-white text-[10px] md:text-[15px] lg:mt-6 w-[80%] md:w-[80%] lg:w-[50%] drop-shadow-xl sm:mt-4">
           {!isLoading ? data[0]?.description : ""}
         </p>
-        <div className="flex flex-row items-center md:mt-6 justify-between flex-shrink sm:mt-4">
+        <div className="flex flex-row items-center md:mt-6 justify-between flex-shrink sm:mt-4 max-sm:mt-4">
           <div className="flex flex-row items-center flex-shrink">
           <PlayButton  movieId={data && data[0]?.id} />
           <button
@@ -46,10 +46,10 @@ const BillBoard = () => {
             bg-white
             text-white
               bg-opacity-30 rounded-md 
-              lg:py-1 md:py-2 max-sm:py-0.5 sm:py-0.5
-              lg:px-2 md:px-4 max-sm:px-0 sm:px-1
+              lg:py-1 md:py-2 max-sm:py-1 sm:py-1.5
+              lg:px-2 md:px-4 max-sm:px-2 sm:px-2
               w-auto 
-              md:text-xs lg:text-lg max-sm:text-[0.525rem]
+              md:text-xs lg:text-lg max-sm:text-[0.565rem]
               font-semibold
               flex
               flex-row
@@ -58,11 +58,10 @@ const BillBoard = () => {
               hover:bg-opacity-20
               transition
               ml-3
-              mr-1 size-auto"
-              
+              mr-1 size-auto"    
           >
             <AiOutlineInfoCircle
-              className="w-4 md:w-7 mr-2 font-bold size-auto"
+              className="w-4 md:w-7 mr-2 font-bold lg:size-8 sm:size-6 max-sm:size-4"
             />
             More Info
           </button>

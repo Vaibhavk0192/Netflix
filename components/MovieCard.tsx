@@ -17,7 +17,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, profile }) => {
   const { openModal } = useInfoModal();
   const router = useRouter();
   return (
-    <div className="group bg-zinc-900 col-span relative h-[12vw]">
+    <div className="group bg-zinc-900 col-span relative h-[12vw] ">
       <img
         src={data.thumbnailUrl}
         alt="Movie"
@@ -26,7 +26,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, profile }) => {
       rounded-md group-hover:opacity-90 sm:group-hover:opacity-0 delay-300 w-full h-[12vw]"
       />
 
-      <div className=" opacity-0 absolute top-0 transition duration-200 z-10 invisible sm:visible delay-300 w-full scale-0 group-hover:scale-110 group-hover:-translate-y-[6vw] group-hover:translate-x-[2vw] group-hover:opacity-100">
+      <div className=" opacity-0 absolute top-0 transition duration-200 z-10 max-sm:visible sm:visible delay-300 w-full scale-0 group-hover:scale-110 group-hover:-translate-y-[6vw] group-hover:translate-x-[2vw] group-hover:opacity-100">
         <img
           src={data.thumbnailUrl}
           alt="Movie"
@@ -48,7 +48,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, profile }) => {
                 onClick={() => router.push(`/watch/${data?.id}`)}
                 className="cursor-pointer sm:w-6 sm:h-6 lg:w-10 lg:h-10  border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300"
               >
-                <FaThumbsUp className="text-white hover:text-neutral-300 size-auto" />
+                <FaThumbsUp className="text-white hover:text-neutral-300 lg:size-5 md:size-3 sm:size-2" />
               </div>
             </div>
 
