@@ -2,7 +2,7 @@
 import Input from "@/components/input";
 import axios from "axios";
 import { useState, useCallback } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -18,6 +18,12 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [variant, setVariant] = useState("login");
   const [showError, setShowError] = useState("");
+
+  const { status } = useSession();
+
+  if (status === "authenticated") {
+    router.replace("profile");
+  }
 
   const togglevariant = useCallback(() => {
     setVariant((currentvariant) =>
@@ -69,15 +75,15 @@ const Auth = () => {
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {variant === "login" ? "Sign In" : "Sign Up"}
             </h2>
-            {showError&&
+            {showError && (
               <div className="h-18 flex mb-4 text-sm bg-[#d89c30] w-full rounded px-4 py-4 items-center gap-4 ">
                 <IoIosWarning className="h-7 w-7" />
                 <p>
                   <strong>{showError}.</strong> Please try again.
                 </p>
               </div>
-            }
-            <div className="flex flex-col gap-4">
+            )}
+            <form className="flex flex-col gap-4" autoComplete="true">
               {variant === "register" && (
                 <Input
                   label="Username"
@@ -98,9 +104,10 @@ const Auth = () => {
                 onChange={(ev: any) => setPassword(ev.target.value)}
                 id="password"
                 type="password"
-                value={password}
+                value={password} 
+                
               />
-            </div>
+            </form>
             <button
               onClick={variant === "login" ? login : register}
               className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
