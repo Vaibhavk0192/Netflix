@@ -1,11 +1,12 @@
 "use client";
 import userCurrentUser from "@/hooks/useCurrentuser";
 import useProfiles from "@/hooks/useProfiles";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import Profilebuttons from "@/components/Profile manage page/profileButtons";
 import { FaPencilAlt } from "react-icons/fa";
 import { BiSolidPlusCircle } from "react-icons/bi";
+import { useSession } from "next-auth/react";
 
 const images = [
   "/images/default-red.png",
@@ -58,11 +59,17 @@ const Profile = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
+  const { data: profiles, mutate } = useProfiles();
   const { data: currentUser } = userCurrentUser();
   const [isPlus, setisPlus] = useState(true);
-
   const [isVisible, setisVisible] = useState(false);
-
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/auth");
+    },
+  });
+  
   const toggleVisible = () => {
     setisVisible((prev) => !prev);
   };
@@ -82,7 +89,7 @@ const Profile = () => {
     return list || [];
   }, [currentUser]);
 
-  const { data: profiles, mutate } = useProfiles();
+
   useEffect(() => {
     const user = currentUser?.currentUser?.name;
     setName(user);
@@ -128,13 +135,17 @@ const Profile = () => {
     if (!loading) {
       makeProfile();
     }
-    if (profiles && profiles.User.length >= 4) {
+    if (profiles && profiles?.User?.length >= 4) {
       setisPlus(false);
     }
-    if (profiles && profiles.User.length < 4) {
+    if (profiles && profiles?.User?.length < 4) {
       setisPlus(true);
     }
   }, [isProfile, currentUser, isPlus, profiles]);
+
+  if (status === "loading") {
+    return <Suspense fallback={loading}></Suspense>;
+  }
 
   return (
     <div className="flex h-full justify-center w-full items-center">
@@ -146,7 +157,7 @@ const Profile = () => {
           <div onClick={() => {}} className="flex gap-4 flex-wrap">
             <Suspense fallback={<p>Loading</p>}>
               {profiles &&
-                profiles.User.map((i: any) => (
+                profiles?.User?.map((i: any) => (
                   <UserCard
                     key={i.id}
                     id={i.id}

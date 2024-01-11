@@ -70,7 +70,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible, profileData }) => {
         <hr className="bg-gray-600 border-0 h-px my-2" />
 
         <div
-          onClick={() => signOut()}
+          onClick={() => signOut({callbackUrl:"/"})}  
           className="px-3 text-center text-white text-sm hover:underline"
         >
           Sign Out of Netflix
