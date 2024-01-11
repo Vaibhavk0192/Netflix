@@ -78,24 +78,24 @@ const Manage = () => {
     );
   } else {
     return (
-      <div>
-        <div className="w-full h-auto overflow-x-hidden overflow-y-auto sm:mt-[4rem] max-sm:mt-[2rem] flex flex-wrap self-center">
-          <div className="relative lg:w-[43%] lg:m-auto sm:m-auto flex sm:flex-col flex-wrap  sm:w-[70%]">
+      <div className="w-full">
+        <div className=" w-full h-auto  overflow-y-auto sm:mt-[4rem] max-sm:mt-[2rem] flex flex-wrap sm:self-center">
+          <div className="lg:w-[43%] m-auto flex flex-col flex-wrap sm:w-[70%] max-sm:w-full">
             <div
-              className="text-white sm:text-[3.5rem] max-sm:text-[2rem] font-normal border-b max-sm:m-auto"
+              className="text-white sm:text-[3.5rem] max-sm:text-[2rem] font-normal border-b "
               style={{ borderBottomColor: "#232323" }}
             >
               Edit Profile
             </div>
-            <div className="flex sm:flex-row max-sm:flex-col mt-6">
+            <div className="flex sm:flex-row max-sm:flex-col mt-6 ">
               <img
                 src={profile && profile.imageUrl}
                 className=" h-32 object-contain"
               />
-              <div className="sm:ml-6 flex flex-col w-full ">
+              <div className="sm:ml-6 flex flex-col w-full max-sm:px-2">
                 <input
                   placeholder="Name"
-                  className="bg-[#666666] px-2 py-2 text-white outline-none font-normal text-lg placeholder:text-[#CCCCCC] placeholder:pl-2"
+                  className="bg-[#666666] px-2 py-2 text-white outline-none font-normal text-lg placeholder:text-[#CCCCCC] placeholder:pl-2 w-full"
                   value={name}
                   onChange={(e) => {
                     setName(e.target.value);
