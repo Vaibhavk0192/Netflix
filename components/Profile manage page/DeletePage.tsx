@@ -51,7 +51,7 @@ const DeletePage: React.FC<DeleteProps> = ({ func, name, image, profile }) => {
             </span>
           </div>
           <div className="text-left text-white ml-6 w-full flex items-center font-medium text-base">
-            This profile's history – including My List, ratings and activity –
+            This profile&aposs history  including My List, ratings and activity 
             will be gone forever, and you will not be able to access it again.
           </div>
         </div>

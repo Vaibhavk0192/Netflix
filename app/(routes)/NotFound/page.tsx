@@ -12,7 +12,7 @@ const NotFound = () => {
         <div className="text-white absolute top-[23%] left-[27%]  flex flex-col items-center">
           <div className="text-7xl font-bold mb-8">Lost your way?</div>
           <div className="text-xl">
-            Sorry, we can't find that page, You'll find lots to explore on the
+            Sorry, we can&apost find that page, You&aposll find lots to explore on the
             home page.
           </div>
           <button className="text-black bg-white bg-opacity-100 hover:bg-opacity-80 py-2 px-5 rounded-md font-semibold text-lg mt-8">
