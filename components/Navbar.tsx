@@ -9,22 +9,31 @@ import { useState, useCallback, useEffect } from "react";
 const TOP_OFFSET = 66;
 
 interface NavbarProps {
-  profileData: {id: string; name: string;imageUrl:string,favourites:string[],likedMovies:string[],userId:string}[];
+  profileData: {
+    id: string;
+    name: string;
+    imageUrl: string;
+    favourites: string[];
+    likedMovies: string[];
+    userId: string;
+  }[];
   profileId: string;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ profileData, profileId }) => {
   const [name, setName] = useState("");
+  const [image, setImage] = useState("");
   const [ShowMobileMenu, setShowMobileMenu] = useState(false);
   const [ShowAccountMenu, setShowAccountMenu] = useState(false);
   const [ShowBackground, setShowBackground] = useState(false);
 
   useEffect(() => {
-    if (profileData!==undefined) {
+    if (profileData !== undefined) {
       const profileInfo = profileData?.findIndex((profile: any) => {
         return profileId === profile.id;
       });
       setName(profileData[profileInfo]?.name);
+      setImage(profileData[profileInfo]?.imageUrl);
     }
   }, [profileData]);
 
@@ -91,7 +100,7 @@ const Navbar: React.FC<NavbarProps> = ({ profileData, profileId }) => {
             className="flex flex-row  gap-2 items-center cursor-pointer relative"
           >
             <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
-              <img src="/images/default-blue.png" alt="" />
+              <img src={image} alt="" />
             </div>
             <BsChevronDown
               className={`text-white transition ${
