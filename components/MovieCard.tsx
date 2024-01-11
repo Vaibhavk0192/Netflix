@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { BsFillPlayFill, BsChevronDown } from "react-icons/bs";
 import { FaThumbsUp } from "react-icons/fa";
 import FavouriteButton from "./FavouriteButton";
-
 import useInfoModal from "@/hooks/useInfoModal";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import MovieDesc from "./Icons component/movieDesc";

@@ -79,20 +79,20 @@ const Manage = () => {
   } else {
     return (
       <div>
-        <div className="w-full h-auto overflow-x-hidden overflow-y-auto mt-[4rem] flex flex-wrap self-center">
-          <div className="relative lg:w-[43%] lg:m-auto sm:m-auto flex flex-col flex-wrap  sm:w-[70%] max:sm:w-full max-sm:px-8">
+        <div className="w-full h-auto overflow-x-hidden overflow-y-auto sm:mt-[4rem] max-sm:mt-[2rem] flex flex-wrap self-center">
+          <div className="relative lg:w-[43%] lg:m-auto sm:m-auto flex sm:flex-col flex-wrap  sm:w-[70%]">
             <div
-              className="text-white sm:text-[3.5rem] max-sm:text-[2rem] font-normal border-b "
+              className="text-white sm:text-[3.5rem] max-sm:text-[2rem] font-normal border-b max-sm:m-auto"
               style={{ borderBottomColor: "#232323" }}
             >
               Edit Profile
             </div>
-            <div className="flex mt-6">
+            <div className="flex sm:flex-row max-sm:flex-col mt-6">
               <img
                 src={profile && profile.imageUrl}
                 className=" h-32 object-contain"
               />
-              <div className=" ml-6 flex flex-col ">
+              <div className="sm:ml-6 flex flex-col w-full ">
                 <input
                   placeholder="Name"
                   className="bg-[#666666] px-2 py-2 text-white outline-none font-normal text-lg placeholder:text-[#CCCCCC] placeholder:pl-2"
