@@ -25,7 +25,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({movieId}) => {
     "
     >
       <BsFillPlayFill className="mr-0.5 ml-2 lg:size-8 sm:size-8 max-sm:size-6"  />
-      <span className="mr-5 ">Play</span>
+      <span className="mr-5 max-sm:text-xs">Play</span>
     </button>
   );
 };

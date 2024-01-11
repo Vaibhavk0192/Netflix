@@ -41,13 +41,13 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
 
   return (
     <div className="z-50 transition duration-300 bg-black bg-opacity-80 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0">
-      <div className="relative w-full mx-auto max-w-[70rem] rounded-md overflow-hidden">
+      <div className="relative w-full mx-auto max-w-[70rem] max-sm:w-[90%] rounded-md overflow-hidden">
         <div
           className={`${
             isVisible ? "scale-100" : "scale-0"
           } transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md w-full`}
         >
-          <div className="relative h-96 w-full">
+          <div className="relative sm:h-96  w-full">
             <video
               poster={data?.thumbnailUrl}
               autoPlay
@@ -58,12 +58,12 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
             />
             <div
               onClick={handleClose}
-              className="cursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center"
+              className="cursor-pointer absolute top-3 right-3 h-10 w-10 max-sm:h-6 max-sm:w-6 rounded-full bg-black bg-opacity-70 flex items-center justify-center"
             >
-              <AiOutlineClose className="text-white w-6" />
+              <AiOutlineClose className="text-white w-6 max-sm:size-3" />
             </div>
-            <div className="absolute bottom-[10%] left-10 w-[92.5%]">
-              <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-8">
+            <div className="absolute bottom-[10%] left-10 max-sm:left-4 w-[92.5%]">
+              <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-8 max-sm:mb-2 max-sm:text-2xl">
                 {data?.title}
               </p>
               <div className="flex flex-row items-center justify-between">
@@ -90,31 +90,31 @@ const InfoModel: React.FC<InfoModelProps> = ({ visible, onClose }) => {
             </div>
           </div>
 
-          <div className="px-12 py-8 flex w-full text-[#9ca3af] font-normal  ">
-            <div className="basis-4/6  flex flex-col">
-              <div className="flex flex-wrap gap-2 items-center">
-                <span className="text-green-400 font-semibold lg:text-[20px] sm:text-[px]">
+          <div className="sm:px-12 max-sm:px-4 py-8 flex w-full text-[#9ca3af] font-normal flex-row max-sm:flex-col ">
+            <div className="sm:basis-4/6 flex flex-col">
+              <div className="flex flex-wrap gap-2  items-center">
+                <span className="text-green-400 font-semibold lg:text-[20px] sm:text-[px] max-sm:text-sm">
                   97% Match
                 </span>
                 <span>{data.year}</span>
                 <span>{data.duration}</span>
                 <HDTag />
                 <ADTag />
-                <LuSubtitles size={25} />
+                <LuSubtitles className="max-sm:size-4 sm:size-5" />
               </div>
-              <div className="flex flex-row flex-wrap mt-4 gap-3">
+              <div className="flex flex-row flex-wrap mt-4 gap-3 ">
                 <Tag tag={data.tag} />
-                <span className="text-white text-md ">
+                <span className="text-white text-md max-sm:text-sm  ">
                   {data.tagDescription}
                 </span>
               </div>
 
-              <div className="mt-10">
-                <span className="text-white ">{data.description}</span>
+              <div className="mt-10 max-sm:text-sm max-sm:mt-8">
+                <span className="text-white">{data.description}</span>
               </div>
             </div>
 
-            <div className="basis-2/6 flex flex-col text-sm pl-8">
+            <div className="basis-2/6 flex flex-col text-sm pl-8 max-sm:mt-6 max-sm:pl-0">
               <div className="flex flex-row items-start ">
                 <span>
                   Cast:

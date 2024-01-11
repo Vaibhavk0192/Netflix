@@ -26,8 +26,8 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible, profileData }) => {
     return null;
   }
   return (
-    <div className="bg-black w-52 absolute top-14 right-0 py-5 flex-col border-gray-800 flex rounded-md">
-      <div className="flex flex-col gap-3">
+    <div className="bg-black w-52 max-sm:w-44 absolute top-10 right-0 py-5 flex-col border-gray-800 flex rounded-md">
+      <div className="flex flex-col gap-3 max-sm:gap-1.5 text-sm max-sm:text-xs">
         {profileData.map((i: any) => (
           <AccountProfile
             key={i.id}
@@ -44,25 +44,25 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible, profileData }) => {
           }}
         >
           <FaPencilAlt size={25} className="text-gray-500 mr-2" />
-          <p className="text-white text-sm group-hover/item:underline">
+          <p className="text-white  group-hover/item:underline">
             Manage Profiles
           </p>
         </div>
         <div className=" px-3 group/item flex flex-row gap-3 items-center w-full">
           <TbArrowAutofitRight size={33} className="text-gray-500 " />
-          <p className="text-white text-sm group-hover/item:underline">
+          <p className="text-white  group-hover/item:underline">
             Transfer Profile
           </p>
         </div>
         <div className=" px-3 group/item flex flex-row gap-3 items-center w-full ">
           <MdOutlinePerson size={35} className="text-gray-500 " />
-          <p className="text-white text-sm group-hover/item:underline">
+          <p className="text-white  group-hover/item:underline">
             Account
           </p>
         </div>
         <div className=" px-3 group/item flex flex-row gap-3 items-center w-full">
           <BiHelpCircle size={35} className="text-gray-500 " />
-          <p className="text-white text-sm group-hover/item:underline">
+          <p className="text-white  group-hover/item:underline">
             Help Center
           </p>
         </div>
@@ -71,7 +71,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible, profileData }) => {
 
         <div
           onClick={() => signOut({callbackUrl:"/"})}  
-          className="px-3 text-center text-white text-sm hover:underline"
+          className="px-3 text-center text-white  hover:underline"
         >
           Sign Out of Netflix
         </div>

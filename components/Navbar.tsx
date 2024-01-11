@@ -62,11 +62,11 @@ const Navbar: React.FC<NavbarProps> = ({ profileData, profileId }) => {
   return (
     <nav className="w-full fixed z-40">
       <div
-        className={`px-4 md:px-4 py-6 flex flex-row items-center transition duration-500 ${
+        className={`px-4 md:px-4 py-6 sm:px-4 flex flex-row items-center transition duration-500 ${
           ShowBackground ? "bg-zinc-900 bg-opacity-90" : ""
         }`}
       >
-        <img className="h-4 lg:h-7 ml-12" src="/images/logo.png" alt="logo" />
+        <img className="h-4 lg:h-7 sm:ml-12 max-sm:ml-2" src="/images/logo.png" alt="logo" />
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
           <NavbarItem label="Home" />
           <NavbarItem label="Series" />
@@ -77,9 +77,9 @@ const Navbar: React.FC<NavbarProps> = ({ profileData, profileId }) => {
         </div>
         <div
           onClick={toggleMobileMenu}
-          className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
+          className="lg:hidden flex flex-row items-center gap-2 sm:ml-8 max-sm:ml-4 cursor-pointer relative"
         >
-          <p className="text-white text-sm">Browse</p>
+          <p className="text-white text-sm max-sm:text-xs">Browse</p>
           <BsChevronDown
             className={`text-white transition ${
               ShowMobileMenu ? "rotate-180" : "rotate-0"
@@ -87,11 +87,11 @@ const Navbar: React.FC<NavbarProps> = ({ profileData, profileId }) => {
           />
           <MobileMenu visible={ShowMobileMenu} />
         </div>
-        <div className="flex flex-row ml-auto mr-12 gap-7 items-center">
+        <div className="flex flex-row ml-auto sm:mr-12 max-sm:mr-2 sm:gap-7 max-sm:gap-2 items-center">
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BsSearch />
           </div>
-          <span className="text-white">{name}</span>
+          <span className="text-white max-sm:text-xs ">{name}</span>
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BsBell />
           </div>
