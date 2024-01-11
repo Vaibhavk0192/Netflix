@@ -78,24 +78,24 @@ const Manage = () => {
     );
   } else {
     return (
-      <div className="w-full">
-        <div className=" w-full h-auto  overflow-y-auto sm:mt-[4rem] max-sm:mt-[2rem] flex flex-wrap sm:self-center">
-          <div className="lg:w-[43%] m-auto flex flex-col flex-wrap sm:w-[70%] max-sm:w-full">
+      <div className=" items-center flex justify-center ">
+        <div className="w-full sm:mt-[4rem] max-sm:mt-[2rem] flex flex-wrap sm:self-center md:px-10 max-lg:px-10">
+          <div className="lg:w-[43%] m-auto flex flex-col flex-wrap ">
             <div
-              className="text-white sm:text-[3.5rem] max-sm:text-[2rem] font-normal border-b "
+              className="text-white max-sm:px-10 sm:text-[3.5rem] max-sm:text-[2rem] font-normal border-b "
               style={{ borderBottomColor: "#232323" }}
             >
               Edit Profile
             </div>
-            <div className="flex sm:flex-row max-sm:flex-col mt-6 ">
+            <div className="flex sm:flex-row max-sm:flex-col mt-6 rounded">
               <img
                 src={profile && profile.imageUrl}
-                className=" h-32 object-contain"
+                className=" h-32 object-contain max-sm:mb-5 rounded"
               />
-              <div className="sm:ml-6 flex flex-col w-full max-sm:px-2">
+              <div className="sm:ml-6 flex flex-col max-sm:px-10">
                 <input
                   placeholder="Name"
-                  className="bg-[#666666] px-2 py-2 text-white outline-none font-normal text-lg placeholder:text-[#CCCCCC] placeholder:pl-2 w-full"
+                  className="bg-[#666666] px-2 py-2 text-white outline-none font-normal text-lg placeholder:text-[#CCCCCC] placeholder:pl-2 w-full rounded"
                   value={name}
                   onChange={(e) => {
                     setName(e.target.value);
@@ -106,7 +106,7 @@ const Manage = () => {
                   <select
                     name="language"
                     id="language"
-                    className="outline-none px-3 py-1 bg-black text-white border text-sm border-white hover:bg-[rgb(45,45,45)]"
+                    className="outline-none px-3 py-1 bg-black text-white border text-sm border-white hover:bg-[rgb(45,45,45)] rounded-sm"
                   >
                     <option defaultValue="English">English</option>
                     <option value="Hindi">Hindi</option>
@@ -122,11 +122,11 @@ const Manage = () => {
                 </span>
                 <input
                   placeholder="Create Game Handle"
-                  className="bg-[#666666] mt-4 px-2 py-2 text-white outline-none font-normal text-lg placeholder:text-[#CCCCCC] placeholder:pl-2"
+                  className="bg-[#666666] mt-4 px-2 py-2 text-white outline-none font-normal text-lg placeholder:text-[#CCCCCC] placeholder:pl-2 rounded"
                 />
                 <hr className="border-1 h-px bg-[#232323] mt-10 border-transparent" />
                 <Headings heading="Maturity Settings" />
-                <span className="text-white text-sm mt-3 bg-[rgb(45,45,45)] py-2 px-4 w-max font-semibold">
+                <span className="text-white text-sm mt-3 bg-[rgb(45,45,45)] py-2 px-4 w-max font-semibold rounded">
                   All Maturity Ratings
                 </span>
                 <span className="text-white text-sm mt-3 mb-8">
@@ -136,29 +136,31 @@ const Manage = () => {
                 </span>
                 <Profilebuttons text="Edit" />
                 <hr className="border-1 h-px bg-[#232323] mt-8 border-transparent" />
-                <Headings heading="Autoplay controls"/>
-                <br/>
+                <Headings heading="Autoplay controls" />
+                <br />
                 <AutoPlayText text="Autoplay next episodes in series for all devices." />
                 <AutoPlayText text="Autoplay previews while browsing on all devices." />
               </div>
             </div>
-            <hr className="border-1 h-px bg-[#232323] mt-8 border-transparent" />
-            <div className="flex mt-8 items-center gap-4 mb-10">
+            <hr className="border-1 bg-[#232323] mt-8 border-transparent" />
+            <div className="flex mt-8 max-sm:flex-wrap gap-4 mb-10 max-sm:px-10">
               <button
-                className="w-max px-6 py-1 bg-white hover:bg-[#e50914] hover:text-white font-semibold text-[1.25rem]"
+                className="w-max px-6 py-1 bg-white hover:bg-[#e50914] hover:text-white font-semibold text-[1.25rem] max-sm:self-center max-sm:w-full max-sm:px-10 rounded"
                 onClick={handleSave}
               >
                 Save
               </button>
-              <div
-                onClick={() => {
-                  router.back();
-                }}
-              >
-                <Profilebuttons text="Cancel" />
-              </div>
-              <div onClick={toggleDelete}>
-                <Profilebuttons text="Delete Profile" />
+              <div className=" flex gap-4 max-sm:w-full max-sm:gap-4 max-sm:justify-around">
+                <div
+                  onClick={() => {
+                    router.back();
+                  }}
+                >
+                  <Profilebuttons text="Cancel" />
+                </div>
+                <div onClick={toggleDelete}>
+                  <Profilebuttons text="Delete Profile" />
+                </div>
               </div>
             </div>
           </div>
