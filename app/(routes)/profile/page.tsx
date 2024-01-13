@@ -56,10 +56,10 @@ const UserCard: React.FC<UserCardProps> = ({ name, image, id, visible }) => {
   );
 };
 const Profile = () => {
+  const { data: profiles, mutate } = useProfiles();
   const router = useRouter();
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
-  const { data: profiles, mutate } = useProfiles();
   const { data: currentUser } = userCurrentUser();
   const [isPlus, setisPlus] = useState(true);
   const [isVisible, setisVisible] = useState(false);
@@ -69,7 +69,7 @@ const Profile = () => {
       redirect("/auth");
     },
   });
-  
+
   const toggleVisible = () => {
     setisVisible((prev) => !prev);
   };
@@ -88,7 +88,6 @@ const Profile = () => {
     }
     return list || [];
   }, [currentUser]);
-
 
   useEffect(() => {
     const user = currentUser?.currentUser?.name;

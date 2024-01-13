@@ -38,3 +38,4 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ status: 400 });
   }
 }
+export const dynamic = "force-dynamic"

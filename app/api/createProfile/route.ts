@@ -1,5 +1,3 @@
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 import serverAuth from "@/lib/serverAuth";
@@ -33,11 +31,13 @@ export async function POST(req: Request) {
         },
       });
 
-      return NextResponse.json(userUpdated, { status: 200 });
+      return Response.json(userUpdated, { status: 200 });
     }
-    return NextResponse.json({ status: 405 });
+    return Response.json({ status: 405 });
   } catch (err) {
     console.log(err);
-    return NextResponse.json({ status: 400 });
+    return Response.json({ status: 400 });
   }
 }
+
+export const dynamic = "force-dynamic"

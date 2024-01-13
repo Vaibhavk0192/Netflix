@@ -1,12 +1,11 @@
 import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 import serverAuth from "@/lib/serverAuth";
 
 export async function GET(req: NextApiRequest) {
   if (req.method !== "GET") {
-    return NextResponse.json({ status: 405 });
+    return Response.json({ status: 405 });
   }
   try {
     await serverAuth();
@@ -16,9 +15,10 @@ export async function GET(req: NextApiRequest) {
       take: 1,
       skip: randomIndex,
     });
-    return NextResponse.json(randomMovies,{status: 200 });
+    return Response.json(randomMovies, { status: 200 });
   } catch (err) {
     console.log(err);
-    return NextResponse.json({ status: 400 });
+    return Response.json({ status: 400 });
   }
 }
+export const dynamic = "force-dynamic"

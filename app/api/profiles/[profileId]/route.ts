@@ -33,3 +33,5 @@ export async function GET(
     return NextResponse.json({ status: 400 });
   }
 }
+
+export const dynamic = 'auto'
