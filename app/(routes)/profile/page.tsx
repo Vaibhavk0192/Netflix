@@ -82,7 +82,7 @@ const Profile = () => {
     if (!currentUser) {
       return;
     }
-    const list = currentUser.currentUser.profile;
+    const list = currentUser?.currentUser?.profile;
     if (list && list.length == 0) {
       setLoading(false);
     }
