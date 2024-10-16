@@ -42,8 +42,8 @@ const Auth = () => {
       if (res?.status == 200) {
         router.replace("/profile");
       } else if (res?.status == 401) {
-        console.log(res?.status);
-        setShowError(res?.error?.toString() || "");
+        // console.log(res?.status);
+        setShowError("Invalid credentials");
       } else {
       }
     } catch (error) {
@@ -53,14 +53,24 @@ const Auth = () => {
 
   const register = useCallback(async () => {
     try {
-      await axios.post("/api/register", {
+      const res = await axios.post("/api/register", {
         email,
         name,
         password,
       });
-      login();
-    } catch (err) {
-      console.log(err);
+
+      if (res?.status == 200) {
+        login();
+      } else if (res.status == 422) {
+        setShowError("Email Already Registered");
+      }
+    } catch (err: any) {
+      if (err.response && err.response.status === 422) {
+        setShowError("Email Already Registered");
+      } else {
+        setShowError("Something went wrong. Please try again.");
+        console.log(err);
+      }
     }
   }, [email, name, password, login]);
 
@@ -104,8 +114,7 @@ const Auth = () => {
                 onChange={(ev: any) => setPassword(ev.target.value)}
                 id="password"
                 type="password"
-                value={password} 
-                
+                value={password}
               />
             </form>
             <button
